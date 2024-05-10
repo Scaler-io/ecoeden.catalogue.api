@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ecoeden.catalogue.Application\Ecoeden.Catalogue.Application.csproj" />
+    <ProjectReference Include="..\Ecoeden.catalogue.Domain\Ecoeden.Catalogue.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
