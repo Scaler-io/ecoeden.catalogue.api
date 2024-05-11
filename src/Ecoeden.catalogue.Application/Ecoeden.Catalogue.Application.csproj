@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Ecoeden.catalogue.Domain\Ecoeden.Catalogue.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

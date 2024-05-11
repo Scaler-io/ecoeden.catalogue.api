@@ -1,24 +1,32 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>diable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <None Remove="DI\gk5fg52b.jej~" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="DI\" />
+    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Ecoeden.catalogue.Application\Ecoeden.Catalogue.Application.csproj" />
-    <ProjectReference Include="..\Ecoeden.catalogue.Domain\Ecoeden.Catalogue.Domain.csproj" />
     <ProjectReference Include="..\Ecoeden.Catalogue.Infrastructure\Ecoeden.Catalogue.Infrastructure.csproj" />
+    <ProjectReference Include="..\Ecoeden.Swagger\Ecoeden.Swagger.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Serilog.ILogger">
+      <Alias>ILogger</Alias>
+    </Using>
   </ItemGroup>
 
 </Project>

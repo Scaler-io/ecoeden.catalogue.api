@@ -1,25 +1,33 @@
+using Ecoeden.Catalogue.Api;
+using Ecoeden.Catalogue.Api.DI;
+using Ecoeden.Catalogue.Infrastructure.DI;
+using Ecoeden.Swagger;
+using Serilog;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var apiName = SwaggerConfiguration.ExtractApiNameFromEnvironmentVariable();
+var apiDescription = builder.Configuration["ApiDescription"];
+var apiHost = builder.Configuration["ApiOriginHost"];
+var swaggerConfiguration = new SwaggerConfiguration(apiName, apiDescription, apiHost, builder.Environment.IsDevelopment());
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services
+    .ConfigureOptions(builder.Configuration)
+    .AddApplicationServices(builder.Configuration, swaggerConfiguration)
+    .AddInfraServices(builder.Configuration);
+
+var logger = Logging.GetLogger(builder.Configuration, builder.Environment);
+builder.Host.UseSerilog(logger);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.AddApplicationPipelines(app.Environment.IsDevelopment());
+
+try
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    await app.RunAsync();
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
+finally
+{
+    Log.CloseAndFlush();
+}
