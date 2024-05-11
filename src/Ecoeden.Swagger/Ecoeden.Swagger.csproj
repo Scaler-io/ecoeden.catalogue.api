@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ecoeden.catalogue.Domain\Ecoeden.Catalogue.Domain.csproj" />
+    <ProjectReference Include="..\Ecoeden.Catalogue.Domain\Ecoeden.Catalogue.Domain.csproj" />
   </ItemGroup>
 
 </Project>

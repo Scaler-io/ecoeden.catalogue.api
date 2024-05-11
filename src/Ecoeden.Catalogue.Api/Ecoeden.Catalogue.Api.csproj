@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ecoeden.catalogue.Application\Ecoeden.Catalogue.Application.csproj" />
+    <ProjectReference Include="..\Ecoeden.Catalogue.Application\Ecoeden.Catalogue.Application.csproj" />
     <ProjectReference Include="..\Ecoeden.Catalogue.Infrastructure\Ecoeden.Catalogue.Infrastructure.csproj" />
     <ProjectReference Include="..\Ecoeden.Swagger\Ecoeden.Swagger.csproj" />
   </ItemGroup>

@@ -1,7 +1,7 @@
 ﻿using Ecoeden.Catalogue.Domain.Models.Constants;
 using System.Runtime.CompilerServices;
 
-namespace Ecoeden.Catalogue.Infrastructure.Extensions;
+namespace Ecoeden.Catalogue.Application.Extensions;
 public static class LoggerExtensions
 {
     public static ILogger Here(this ILogger logger,

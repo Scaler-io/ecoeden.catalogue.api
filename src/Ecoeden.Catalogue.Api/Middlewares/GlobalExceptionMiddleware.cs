@@ -5,7 +5,7 @@ using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using System.Net.Mime;
 using System.Net;
-using Ecoeden.Catalogue.Infrastructure.Extensions;
+using Ecoeden.Catalogue.Application.Extensions;
 
 namespace Ecoeden.Catalogue.Api.Middlewares;
 

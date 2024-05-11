@@ -1,5 +1,5 @@
 ﻿
-using Ecoeden.Catalogue.Infrastructure.Extensions;
+using Ecoeden.Catalogue.Application.Extensions;
 using Microsoft.AspNetCore.Http.Extensions;
 using Serilog.Context;
 using System.Diagnostics;

@@ -1,6 +1,8 @@
 ﻿using Ecoeden.Catalogue.Application.Contracts.Cache;
+using Ecoeden.Catalogue.Application.Contracts.HealthStatus;
 using Ecoeden.Catalogue.Application.Factories;
 using Ecoeden.Catalogue.Infrastructure.Cache;
+using Ecoeden.Catalogue.Infrastructure.HealthStatus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +13,9 @@ public static class InfrastructureServiceExtensions
     {
         services.AddScoped<ICacheFactory, CacheFactory>();
         services.AddScoped<ICacheService, DistributedCacheService>();
+
+        services.AddScoped<IHealthCheck, DbHealthCheck>();
+        services.AddScoped<IHealthCheckConfiguration, HealthCheckConfiguration>();
 
         services.AddStackExchangeRedisCache(options =>
         {

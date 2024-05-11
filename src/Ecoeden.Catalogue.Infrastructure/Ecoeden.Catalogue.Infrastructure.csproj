@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="App.Metrics.AspNetCore" Version="4.3.0" />
+    <PackageReference Include="App.Metrics.Health" Version="3.2.0" />
+    <PackageReference Include="App.Metrics.Health.Abstractions" Version="3.2.0" />
     <PackageReference Include="Destructurama.Attributed" Version="4.0.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -19,8 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ecoeden.catalogue.Application\Ecoeden.Catalogue.Application.csproj" />
-    <ProjectReference Include="..\Ecoeden.catalogue.Domain\Ecoeden.Catalogue.Domain.csproj" />
+    <ProjectReference Include="..\Ecoeden.Catalogue.Application\Ecoeden.Catalogue.Application.csproj" />
+    <ProjectReference Include="..\Ecoeden.Catalogue.Domain\Ecoeden.Catalogue.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

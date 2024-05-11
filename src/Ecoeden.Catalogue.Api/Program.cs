@@ -1,5 +1,6 @@
 using Ecoeden.Catalogue.Api;
 using Ecoeden.Catalogue.Api.DI;
+using Ecoeden.Catalogue.Application.DI;
 using Ecoeden.Catalogue.Infrastructure.DI;
 using Ecoeden.Swagger;
 using Serilog;
@@ -14,7 +15,8 @@ var swaggerConfiguration = new SwaggerConfiguration(apiName, apiDescription, api
 builder.Services
     .ConfigureOptions(builder.Configuration)
     .AddApplicationServices(builder.Configuration, swaggerConfiguration)
-    .AddInfraServices(builder.Configuration);
+    .AddInfraServices(builder.Configuration)
+    .AddBusinessLogics();
 
 var logger = Logging.GetLogger(builder.Configuration, builder.Environment);
 builder.Host.UseSerilog(logger);
