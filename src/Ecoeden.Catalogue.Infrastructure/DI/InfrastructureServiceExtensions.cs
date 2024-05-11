@@ -1,7 +1,10 @@
 ﻿using Ecoeden.Catalogue.Application.Contracts.Cache;
+using Ecoeden.Catalogue.Application.Contracts.Data;
 using Ecoeden.Catalogue.Application.Contracts.HealthStatus;
 using Ecoeden.Catalogue.Application.Factories;
 using Ecoeden.Catalogue.Infrastructure.Cache;
+using Ecoeden.Catalogue.Infrastructure.Data;
+using Ecoeden.Catalogue.Infrastructure.Data.Repositories;
 using Ecoeden.Catalogue.Infrastructure.HealthStatus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +25,9 @@ public static class InfrastructureServiceExtensions
             options.InstanceName = configuration["Redis:InstanceName"];
             options.Configuration = configuration.GetConnectionString("Redis");
         });
+
+        services.AddScoped(typeof(IDocumentRepository<>), typeof(MongoDocumentRepository<>));
+        services.AddScoped<ICatalogueContext, CatalogueContext>();
 
         return services;
     }

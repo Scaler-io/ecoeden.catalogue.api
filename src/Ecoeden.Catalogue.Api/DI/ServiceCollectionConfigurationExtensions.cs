@@ -10,6 +10,7 @@ public static class ServiceCollectionConfigurationExtensions
         services.Configure<AppConfigOption>(configuration.GetSection(AppConfigOption.OptionName));
         services.Configure<ElasticSearchOption>(configuration.GetSection(ElasticSearchOption.OptionName));
         services.Configure<IdentityGroupAccessOption>(configuration.GetSection(IdentityGroupAccessOption.OptionName));
+        services.Configure<MongoDbOption>(configuration.GetSection(MongoDbOption.OptionName));
 
         return services;
     }
