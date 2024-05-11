@@ -5,13 +5,15 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Catalogue.Api", "Ecoeden.Catalogue.Api\Ecoeden.Catalogue.Api.csproj", "{9B17F15C-ABEF-4982-BD8C-B7F276947323}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecoeden.Catalogue.Domain", "Ecoeden.catalogue.Domain\Ecoeden.Catalogue.Domain.csproj", "{59E75124-AC74-4FE9-8B31-EED3ECE2D496}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Catalogue.Domain", "Ecoeden.catalogue.Domain\Ecoeden.Catalogue.Domain.csproj", "{59E75124-AC74-4FE9-8B31-EED3ECE2D496}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecoeden.Catalogue.Application", "Ecoeden.catalogue.Application\Ecoeden.Catalogue.Application.csproj", "{2F04EC7A-2F4F-4B53-BD36-09067234732B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Catalogue.Application", "Ecoeden.catalogue.Application\Ecoeden.Catalogue.Application.csproj", "{2F04EC7A-2F4F-4B53-BD36-09067234732B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecoeden.Catalogue.Infrastructure", "Ecoeden.Catalogue.Infrastructure\Ecoeden.Catalogue.Infrastructure.csproj", "{5CD37449-DBBC-4F0E-88B3-2CD16017B3FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Catalogue.Infrastructure", "Ecoeden.Catalogue.Infrastructure\Ecoeden.Catalogue.Infrastructure.csproj", "{5CD37449-DBBC-4F0E-88B3-2CD16017B3FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecoeden.Swagger", "Ecoeden.Swagger\Ecoeden.Swagger.csproj", "{E7D482CA-CE06-494A-B927-4CC9A086DF05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Swagger", "Ecoeden.Swagger\Ecoeden.Swagger.csproj", "{E7D482CA-CE06-494A-B927-4CC9A086DF05}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E814A8B6-2750-44A6-BCB8-2F68BDC966CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{E7D482CA-CE06-494A-B927-4CC9A086DF05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7D482CA-CE06-494A-B927-4CC9A086DF05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7D482CA-CE06-494A-B927-4CC9A086DF05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E814A8B6-2750-44A6-BCB8-2F68BDC966CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E814A8B6-2750-44A6-BCB8-2F68BDC966CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E814A8B6-2750-44A6-BCB8-2F68BDC966CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E814A8B6-2750-44A6-BCB8-2F68BDC966CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
