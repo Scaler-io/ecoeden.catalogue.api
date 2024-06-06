@@ -9,6 +9,16 @@ steps:
   - script: |
       dotnet --list-sdks
     displayName: "List all dotnet sdks"
+  
+  - script: |
+      dotnet clean src/Ecoeden.Catalogue.Api.sln --configuration Release
+    displayName: "Clean Solution"
+  
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'restore'
+      projects: 'src/Ecoeden.Catalogue.Api.sln'
+      noCache: true
 
   - task: DotNetCoreCLI@2
     inputs:
