@@ -1,4 +1,5 @@
-﻿using Ecoeden.Catalogue.Application.Features.HealthCheck.Queries;
+﻿using Ecoeden.Catalogue.Application.Contracts.Security;
+using Ecoeden.Catalogue.Infrastructure.Security;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,9 +10,15 @@ public static class BusinessLogicServiceExtensions
 {
     public static IServiceCollection AddBusinessLogics(this IServiceCollection services)
     {
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+        
         services.AddMediatR(Assembly.GetExecutingAssembly());
 
         services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+
+        services.AddScoped<IPermissionMapper, PermissionMapper>();
+
+        services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
         return services;
     }
 }

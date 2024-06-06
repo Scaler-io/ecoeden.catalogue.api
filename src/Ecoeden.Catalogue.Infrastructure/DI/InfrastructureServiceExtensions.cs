@@ -1,5 +1,4 @@
-﻿using Ecoeden.Catalogue.Application.Contracts.Cache;
-using Ecoeden.Catalogue.Application.Contracts.Data;
+﻿using Ecoeden.Catalogue.Application.Contracts.Data;
 using Ecoeden.Catalogue.Application.Contracts.HealthStatus;
 using Ecoeden.Catalogue.Application.Factories;
 using Ecoeden.Catalogue.Infrastructure.Cache;
@@ -15,7 +14,7 @@ public static class InfrastructureServiceExtensions
     public static IServiceCollection AddInfraServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<ICacheFactory, CacheFactory>();
-        services.AddScoped<ICacheService, DistributedCacheService>();
+        services.AddScoped<DistributedCacheService>();
 
         services.AddScoped<IHealthCheck, DbHealthCheck>();
         services.AddScoped<IHealthCheckConfiguration, HealthCheckConfiguration>();

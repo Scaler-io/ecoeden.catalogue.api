@@ -10,11 +10,12 @@ using Swashbuckle.AspNetCore.Filters;
 using System.Net;
 using Ecoeden.Catalogue.Domain.Models.Dtos;
 using Ecoeden.Catalogue.Application.Extensions;
+using Ecoeden.Catalogue.Api.Services;
 
 namespace Ecoeden.Catalogue.Api.Controllers.v1;
 
-public class HealthCheckController(ILogger logger, IMediator mediator)
-    : ApiBaseController(logger)
+public class HealthCheckController(ILogger logger, IIdentityService identityService, IMediator mediator)
+    : ApiBaseController(logger, identityService)
 {
     private readonly IMediator _mediator = mediator;
 

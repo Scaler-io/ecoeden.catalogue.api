@@ -1,14 +1,19 @@
 ﻿using Ecoeden.Catalogue.Application.Contracts.Cache;
 using Ecoeden.Catalogue.Application.Factories;
 using Ecoeden.Catalogue.Domain.Models.Enums;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Ecoeden.Catalogue.Infrastructure.Cache;
-internal class CacheFactory(IEnumerable<ICacheService> cacheServices) : ICacheFactory
+internal class CacheFactory(IServiceProvider serviceProvider) : ICacheFactory
 {
-    private readonly IEnumerable<ICacheService> _cacheServices = cacheServices;
+    private readonly IServiceProvider _serviceProvider = serviceProvider;
 
-    public ICacheService GetService(CacheServiceTypes type)
+    public ICacheService CreateService(CacheServiceTypes type)
     {
-        return _cacheServices.FirstOrDefault(x => x.ServiceType == type);
+        return type switch
+        {
+            CacheServiceTypes.Distributed => _serviceProvider.GetRequiredService<DistributedCacheService>(),
+            _ => throw new ArgumentException($"Unsupported cache service type: {type}", nameof(type))
+        };
     }
 }

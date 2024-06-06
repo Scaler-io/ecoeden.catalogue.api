@@ -18,7 +18,7 @@ public static class LoggerExtensions
         logger.Debug(LoggerConstants.MethodEntered);
     }
 
-    public static void MethodExited(this ILogger logger, object withResult = null)
+    public static void MethodExited(this ILogger logger, object? withResult = null)
     {
         logger.Debug(LoggerConstants.MethodExited);
         if (withResult is not null) logger.Debug("{MethodExited} with result {@result}", LoggerConstants.MethodExited, withResult);

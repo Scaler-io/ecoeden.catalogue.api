@@ -1,5 +1,7 @@
 ﻿using Ecoeden.Catalogue.Api.Extensions;
+using Ecoeden.Catalogue.Api.Services;
 using Ecoeden.Catalogue.Domain.Models.Core;
+using Ecoeden.Catalogue.Domain.Models.Dtos;
 using Ecoeden.Catalogue.Domain.Models.Enums;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -8,21 +10,24 @@ namespace Ecoeden.Catalogue.Api.Controllers;
 
 [Route("api/v{version:apiVersion}")]
 [ApiController]
-public class ApiBaseController(ILogger logger) : ControllerBase
+public class ApiBaseController(ILogger logger, IIdentityService identityService) : ControllerBase
 {
     protected ILogger Logger { get; set; } = logger;
+    private readonly IIdentityService _identityService = identityService;
 
-    protected RequestInformation RequestInformation => new RequestInformation
+    protected RequestInformation RequestInformation => new()
     {
+        CurrentUser = CurrentUser,
         CorrelationId = GetOrGenerateCorelationId()
     };
+
+    public UserDto CurrentUser => _identityService.PrepareUser();
 
     private string GetOrGenerateCorelationId() => Request?.GetRequestHeaderOrDefault("CorrelationId", $"GEN-{Guid.NewGuid()}");
 
     protected IActionResult OkOrFailure<T>(Result<T> result)
-        where T : class
     {
-        if(result == null) return NotFound(new ApiResponse(ErrorCodes.NotFound));
+        if (result == null) return NotFound(new ApiResponse(ErrorCodes.NotFound));
         if (result.IsSuccess && result.Data == null) return NotFound(new ApiResponse(ErrorCodes.NotFound));
         if (result.IsSuccess && result.Data != null) return Ok(result.Data);
 

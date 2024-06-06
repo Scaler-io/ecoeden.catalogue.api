@@ -1,8 +1,12 @@
 ﻿using Asp.Versioning.ApiExplorer;
+using Ecoeden.Catalogue.Api.Filters;
 using Ecoeden.Catalogue.Api.Middlewares;
+using Ecoeden.Catalogue.Api.Services;
+using Ecoeden.Catalogue.Domain.Configurations;
 using Ecoeden.Catalogue.Domain.Models.Core;
 using Ecoeden.Catalogue.Domain.Models.Enums;
 using Ecoeden.Swagger;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -32,6 +36,9 @@ public static class ServiceCollectionExtensions
                 configuration.SerializerSettings.NullValueHandling = NullValueHandling.Include;
                 configuration.SerializerSettings.Converters.Add(new StringEnumConverter());
             });
+
+        services.AddHttpContextAccessor();
+        services.AddSingleton<IIdentityService, IdentityService>();
 
         services.AddTransient<CorrelationHeaderEnricher>();
         services.AddTransient<RequestLoggerMiddleware>();
@@ -63,6 +70,27 @@ public static class ServiceCollectionExtensions
         {
             options.InvalidModelStateResponseFactory = HandleFrameworkValidationFailure();
         });
+
+        var identityGroupAccess = configuration
+        .GetSection("IdentityGroupAccess")
+            .Get<IdentityGroupAccessOption>();
+
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.Audience = identityGroupAccess.Audience;
+                options.Authority = identityGroupAccess.Authority;
+                options.TokenValidationParameters = new()
+                {
+                    ValidIssuer = identityGroupAccess.Authority,
+                    ValidAudience = identityGroupAccess.Audience,
+                    ValidateIssuerSigningKey = true,
+                    ValidateAudience = false,
+                    ValidateIssuer = false,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
 
         return services;
     }

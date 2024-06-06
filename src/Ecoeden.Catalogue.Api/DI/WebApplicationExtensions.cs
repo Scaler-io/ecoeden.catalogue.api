@@ -1,7 +1,6 @@
 ﻿using Asp.Versioning.ApiExplorer;
 using Ecoeden.Catalogue.Api.Middlewares;
 using Ecoeden.Swagger;
-using Microsoft.Extensions.Options;
 
 namespace Ecoeden.Catalogue.Api.DI;
 
@@ -20,11 +19,11 @@ public static class WebApplicationExtensions
             });
         }
 
-        app.UseHttpsRedirection();
-
         app.UseMiddleware<CorrelationHeaderEnricher>()
             .UseMiddleware<RequestLoggerMiddleware>()
             .UseMiddleware<GlobalExceptionMiddleware>();
+
+        app.UseAuthentication();
 
         app.UseAuthorization();
 

@@ -2,7 +2,6 @@
 
 namespace Ecoeden.Catalogue.Domain.Models.Core;
 public class Result<T>
-    where T : class
 {
     public T Data { get; set; }
     public bool IsSuccess { get; set; }
