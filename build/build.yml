@@ -31,7 +31,7 @@ steps:
       containerRegistry: "$(dockerHubServiceConnection)"
       repository: "$(imageName)"
       command: "buildAndPush"
-      Dockerfile: "**/Dockerfile"
+      Dockerfile: "src/Ecoeden.Catalogue.Api/Dockerfile"
       tags: |
         $(Build.BuildId)
 
