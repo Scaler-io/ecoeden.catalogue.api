@@ -1,46 +1,42 @@
+# build.yml
 parameters:
   - name: imageName
     type: string
   - name: dockerHubServiceConnection
     type: string
 
-jobs:
-  - job: Build
-    displayName: "Build Job"
-    pool:
-      vmImage: "ubuntu-latest"
+steps:
+  steps:
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: "clean"
+        projects: "src/Ecoeden.Catalogue.Api.sln"
+        cleanOutput: true # Ensures the output directory is cleaned
+        noCache: true
 
-    steps:
-      - task: DotNetCoreCLI@2
-        inputs:
-          command: "clean"
-          projects: "src/Ecoeden.Catalogue.Api.sln"
-          cleanOutput: true # Ensures the output directory is cleaned
-          noCache: true
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: "restore"
+        projects: "src/Ecoeden.Catalogue.Api.sln"
+        noCache: true
 
-      - task: DotNetCoreCLI@2
-        inputs:
-          command: "restore"
-          projects: "src/Ecoeden.Catalogue.Api.sln"
-          noCache: true
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: "build"
+        projects: "src/Ecoeden.Catalogue.Api.sln"
+        arguments: "--configuration Release"
 
-      - task: DotNetCoreCLI@2
-        inputs:
-          command: "build"
-          projects: "src/Ecoeden.Catalogue.Api.sln"
-          arguments: "--configuration Release"
+    - task: Docker@2
+      inputs:
+        containerRegistry: "$(dockerHubServiceConnection)"
+        repository: "$(imageName)"
+        command: "buildAndPush"
+        Dockerfile: "**/Dockerfile"
+        tags: |
+          $(Build.BuildId)
 
-      - task: Docker@2
-        inputs:
-          containerRegistry: "$(dockerHubServiceConnection)"
-          repository: "$(imageName)"
-          command: "buildAndPush"
-          Dockerfile: "**/Dockerfile"
-          tags: |
-            $(Build.BuildId)
-
-      - task: PublishBuildArtifacts@1
-        inputs:
-          PathtoPublish: "$(Build.ArtifactStagingDirectory)"
-          ArtifactName: "drop"
-          publishLocation: "Container"
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: "$(Build.ArtifactStagingDirectory)"
+        ArtifactName: "drop"
+        publishLocation: "Container"
