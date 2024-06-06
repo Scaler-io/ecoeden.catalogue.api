@@ -6,7 +6,6 @@ parameters:
     type: string
 
 
-
 steps:
   - task: UseDotNet@2
     inputs:
