@@ -6,27 +6,51 @@ parameters:
     type: string
 
 steps:
-  - script: |
-      dotnet --list-sdks
-    displayName: "List all dotnet sdks"
+  steps:
+    - script: |
+        git clean -fdx
+      displayName: "Clean workspace"
 
-  - task: DotNetCoreCLI@2
-    inputs:
-      command: "build"
-      projects: "src/Ecoeden.Catalogue.Api.sln"
-      arguments: "--configuration Release"
+    - script: |
+        dotnet --list-sdks
+      displayName: "List all dotnet sdks"
 
-  - task: Docker@2
-    inputs:
-      containerRegistry: "$(dockerHubServiceConnection)"
-      repository: "$(imageName)"
-      command: "buildAndPush"
-      Dockerfile: "**/Dockerfile"
-      tags: |
-        $(Build.BuildId)
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: "clean"
+        projects: "src/Ecoeden.Catalogue.Api.sln"
+        cleanOutput: true # Ensures the output directory is cleaned
+        noCache: true
 
-  - task: PublishBuildArtifacts@1
-    inputs:
-      PathtoPublish: "$(Build.ArtifactStagingDirectory)"
-      ArtifactName: "drop"
-      publishLocation: "Container"
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: "restore"
+        projects: "src/Ecoeden.Catalogue.Api.sln"
+        noCache: true
+
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: "build"
+        projects: "src/Ecoeden.Catalogue.Api.sln"
+        arguments: "--configuration Release"
+
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: "build"
+        projects: "src/Ecoeden.Catalogue.Api.sln"
+        arguments: "--configuration Release"
+
+    - task: Docker@2
+      inputs:
+        containerRegistry: "$(dockerHubServiceConnection)"
+        repository: "$(imageName)"
+        command: "buildAndPush"
+        Dockerfile: "**/Dockerfile"
+        tags: |
+          $(Build.BuildId)
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: "$(Build.ArtifactStagingDirectory)"
+        ArtifactName: "drop"
+        publishLocation: "Container"
