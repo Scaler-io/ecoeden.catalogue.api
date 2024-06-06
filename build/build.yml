@@ -6,21 +6,14 @@ parameters:
     type: string
 
 steps:
-  - script: |
-      dotnet --list-sdks
-    displayName: "List all dotnet sdks"
-
-  - script: |
-      dotnet clean src/Ecoeden.Catalogue.Api.sln --configuration Release
-    displayName: "Clean Solution"
-
   - task: DotNetCoreCLI@2
+    displayName: "Restore solution"
     inputs:
       command: "restore"
       projects: "src/Ecoeden.Catalogue.Api.sln"
-      noCache: true
 
   - task: DotNetCoreCLI@2
+    displayName: "Build solution"
     inputs:
       command: "build"
       projects: "src/Ecoeden.Catalogue.Api.sln"
