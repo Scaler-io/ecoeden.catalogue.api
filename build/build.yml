@@ -11,10 +11,6 @@ jobs:
       vmImage: "ubuntu-latest"
 
     steps:
-      - script: |
-          dotnet --list-sdks
-        displayName: "List all dotnet sdks"
-
       - task: DotNetCoreCLI@2
         inputs:
           command: "clean"
