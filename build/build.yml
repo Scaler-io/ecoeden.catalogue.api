@@ -11,19 +11,19 @@ steps:
     displayName: "List all dotnet sdks"
 
   - script: |
-      dotnet clean src/*.sln --configuration Release
+      dotnet clean src/Ecoeden.Catalogue.Api.sln --configuration Release
     displayName: "Clean Solution"
 
   - task: DotNetCoreCLI@2
     inputs:
       command: "restore"
-      projects: "**/*.csproj"
+      projects: "src/Ecoeden.Catalogue.Api.sln"
       noCache: true
 
   - task: DotNetCoreCLI@2
     inputs:
       command: "build"
-      projects: "**/*.csproj"
+      projects: "src/Ecoeden.Catalogue.Api.sln"
       arguments: "--configuration Release"
 
   - task: Docker@2
