@@ -1,0 +1,36 @@
+# build.yml
+parameters:
+  - name: imageName
+    type: string
+  - name: dockerHubServiceConnection
+    type: string
+
+
+
+steps:
+  - task: UseDotNet@2
+    inputs:
+      packageType: "sdk"
+      version: "6.x.x"
+      installationPath: $(Agent.ToolsDirectory)/dotnet
+
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: "build"
+      projects: "**/*.csproj"
+      arguments: "--configuration Release"
+
+  - task: Docker@2
+    inputs:
+      containerRegistry: "$(dockerHubServiceConnection)"
+      repository: "$(imageName)"
+      command: "buildAndPush"
+      Dockerfile: "**/Dockerfile"
+      tags: |
+        $(Build.BuildId)
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: "$(Build.ArtifactStagingDirectory)"
+      ArtifactName: "drop"
+      publishLocation: "Container"
