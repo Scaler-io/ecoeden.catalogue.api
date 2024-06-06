@@ -13,7 +13,7 @@ steps:
   - task: DotNetCoreCLI@2
     inputs:
       command: "build"
-      projects: "**/*.csproj"
+      projects: "**/*.sln"
       arguments: "--configuration Release"
 
   - task: Docker@2
