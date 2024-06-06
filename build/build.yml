@@ -11,7 +11,7 @@ steps:
     displayName: "List all dotnet sdks"
 
   - script: |
-      dotnet clean **/*.csproj --configuration Release
+      dotnet clean src/*.sln --configuration Release
     displayName: "Clean Solution"
 
   - task: DotNetCoreCLI@2
