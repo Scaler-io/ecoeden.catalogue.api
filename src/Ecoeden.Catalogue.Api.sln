@@ -5,9 +5,9 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Catalogue.Api", "Ecoeden.Catalogue.Api\Ecoeden.Catalogue.Api.csproj", "{9B17F15C-ABEF-4982-BD8C-B7F276947323}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Catalogue.Domain", "Ecoeden.catalogue.Domain\Ecoeden.Catalogue.Domain.csproj", "{59E75124-AC74-4FE9-8B31-EED3ECE2D496}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Catalogue.Domain", "Ecoeden.Catalogue.Domain\Ecoeden.Catalogue.Domain.csproj", "{59E75124-AC74-4FE9-8B31-EED3ECE2D496}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Catalogue.Application", "Ecoeden.catalogue.Application\Ecoeden.Catalogue.Application.csproj", "{2F04EC7A-2F4F-4B53-BD36-09067234732B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Catalogue.Application", "Ecoeden.Catalogue.Application\Ecoeden.Catalogue.Application.csproj", "{2F04EC7A-2F4F-4B53-BD36-09067234732B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Catalogue.Infrastructure", "Ecoeden.Catalogue.Infrastructure\Ecoeden.Catalogue.Infrastructure.csproj", "{5CD37449-DBBC-4F0E-88B3-2CD16017B3FB}"
 EndProject
