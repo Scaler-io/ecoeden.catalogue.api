@@ -8,11 +8,7 @@
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Controllers\v2\CategoryController.cs~RFd2569e.TMP" />
-    <None Remove="DI\gk5fg52b.jej~" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />

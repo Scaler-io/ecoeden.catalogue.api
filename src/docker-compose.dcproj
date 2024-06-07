@@ -4,7 +4,7 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <DockerPublishLocally>False</DockerPublishLocally>
-    <ProjectGuid>e814a8b6-2750-44a6-bcb8-2f68bdc966cd</ProjectGuid>
+    <ProjectGuid>249b546f-318e-4b36-abdd-89b721e0c18b</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>ecoeden.catalogue.api</DockerServiceName>

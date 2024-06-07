@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E814A8B6-2750-44A6-BCB8-2F68BDC966CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Swagger", "Ecoeden.Swagger\Ecoeden.Swagger.csproj", "{C6C060D4-CABF-43F5-92AD-DAAC6E491F34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecoeden.Swagger", "Ecoeden.Swagger\Ecoeden.Swagger.csproj", "{C6C060D4-CABF-43F5-92AD-DAAC6E491F34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Catalogue.Infrastructure", "Ecoeden.Catalogue.Infrastructure\Ecoeden.Catalogue.Infrastructure.csproj", "{A2A7586D-D2F7-4952-A12C-415B56DA4300}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecoeden.Catalogue.Infrastructure", "Ecoeden.Catalogue.Infrastructure\Ecoeden.Catalogue.Infrastructure.csproj", "{A2A7586D-D2F7-4952-A12C-415B56DA4300}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Catalogue.Domain", "Ecoeden.Catalogue.Domain\Ecoeden.Catalogue.Domain.csproj", "{48729A59-56EF-4432-8BE6-85CD2D2CCE1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecoeden.Catalogue.Domain", "Ecoeden.Catalogue.Domain\Ecoeden.Catalogue.Domain.csproj", "{48729A59-56EF-4432-8BE6-85CD2D2CCE1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Catalogue.Application", "Ecoeden.Catalogue.Application\Ecoeden.Catalogue.Application.csproj", "{626D446C-3A30-43B2-AAEC-264F28C380B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecoeden.Catalogue.Application", "Ecoeden.Catalogue.Application\Ecoeden.Catalogue.Application.csproj", "{626D446C-3A30-43B2-AAEC-264F28C380B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Catalogue.Api", "Ecoeden.Catalogue.Api\Ecoeden.Catalogue.Api.csproj", "{30ED1C03-9CBF-4DC4-A68F-C982E6D63A9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecoeden.Catalogue.Api", "Ecoeden.Catalogue.Api\Ecoeden.Catalogue.Api.csproj", "{30ED1C03-9CBF-4DC4-A68F-C982E6D63A9B}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{249B546F-318E-4B36-ABDD-89B721E0C18B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E814A8B6-2750-44A6-BCB8-2F68BDC966CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E814A8B6-2750-44A6-BCB8-2F68BDC966CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E814A8B6-2750-44A6-BCB8-2F68BDC966CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E814A8B6-2750-44A6-BCB8-2F68BDC966CD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C6C060D4-CABF-43F5-92AD-DAAC6E491F34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C6C060D4-CABF-43F5-92AD-DAAC6E491F34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6C060D4-CABF-43F5-92AD-DAAC6E491F34}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{30ED1C03-9CBF-4DC4-A68F-C982E6D63A9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30ED1C03-9CBF-4DC4-A68F-C982E6D63A9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30ED1C03-9CBF-4DC4-A68F-C982E6D63A9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{249B546F-318E-4B36-ABDD-89B721E0C18B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{249B546F-318E-4B36-ABDD-89B721E0C18B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{249B546F-318E-4B36-ABDD-89B721E0C18B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{249B546F-318E-4B36-ABDD-89B721E0C18B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
