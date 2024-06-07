@@ -26,6 +26,7 @@ steps:
       repository: "$(imageName)"
       command: "buildAndPush"
       Dockerfile: "**/Dockerfile"
+      buildContext: "$(Build.SourcesDirectory)"
       tags: |
         $(Build.BuildId)
 
