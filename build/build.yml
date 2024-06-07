@@ -6,17 +6,18 @@ parameters:
     type: string
 
 steps:
-  - task: DotNetCoreCLI@2
+  - task: NuGetCommand@2
     displayName: "Restore solution"
     inputs:
       command: "restore"
-      projects: "src/Ecoeden.Catalogue.Api.sln"
+      restoreSolution: "**/*.sln"
+      feedsToUse: "select"
 
   - task: DotNetCoreCLI@2
     displayName: "Build solution"
     inputs:
       command: "build"
-      projects: "src/Ecoeden.Catalogue.Api.sln"
+      projects: "**/*.sln"
       arguments: "--configuration Release"
 
   - task: Docker@2
