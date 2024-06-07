@@ -12,8 +12,8 @@ stages:
       - job: Build
         displayName: "Build job"
         pool:
-          name: 'Azure Pipelines'
-          vmImage: ""
+          name: "Azure Pipelines"
+          vmImage: "ubuntu-latest"
         steps:
           - template: build.yml
             parameters:
