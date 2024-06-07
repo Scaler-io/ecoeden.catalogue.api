@@ -25,8 +25,8 @@ steps:
       containerRegistry: "$(dockerHubServiceConnection)"
       repository: "$(imageName)"
       command: "buildAndPush"
-      Dockerfile: "**/Dockerfile"
-      buildContext: "$(Build.SourcesDirectory)"
+      Dockerfile: "src/Ecoeden.catalogue.Api/Dockerfile"
+      buildContext: "."
       tags: |
         $(Build.BuildId)
 
