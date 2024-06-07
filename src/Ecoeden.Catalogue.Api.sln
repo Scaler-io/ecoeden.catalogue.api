@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Catalogue.Api", "Ecoeden.Catalogue.Api\Ecoeden.Catalogue.Api.csproj", "{9B17F15C-ABEF-4982-BD8C-B7F276947323}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Catalogue.Domain", "Ecoeden.Catalogue.Domain\Ecoeden.Catalogue.Domain.csproj", "{59E75124-AC74-4FE9-8B31-EED3ECE2D496}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Catalogue.Application", "Ecoeden.Catalogue.Application\Ecoeden.Catalogue.Application.csproj", "{2F04EC7A-2F4F-4B53-BD36-09067234732B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Catalogue.Infrastructure", "Ecoeden.Catalogue.Infrastructure\Ecoeden.Catalogue.Infrastructure.csproj", "{5CD37449-DBBC-4F0E-88B3-2CD16017B3FB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecoeden.Swagger", "Ecoeden.Swagger\Ecoeden.Swagger.csproj", "{E7D482CA-CE06-494A-B927-4CC9A086DF05}"
-EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E814A8B6-2750-44A6-BCB8-2F68BDC966CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecoeden.Swagger", "Ecoeden.Swagger\Ecoeden.Swagger.csproj", "{C6C060D4-CABF-43F5-92AD-DAAC6E491F34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecoeden.Catalogue.Infrastructure", "Ecoeden.Catalogue.Infrastructure\Ecoeden.Catalogue.Infrastructure.csproj", "{A2A7586D-D2F7-4952-A12C-415B56DA4300}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecoeden.Catalogue.Domain", "Ecoeden.Catalogue.Domain\Ecoeden.Catalogue.Domain.csproj", "{48729A59-56EF-4432-8BE6-85CD2D2CCE1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecoeden.Catalogue.Application", "Ecoeden.Catalogue.Application\Ecoeden.Catalogue.Application.csproj", "{626D446C-3A30-43B2-AAEC-264F28C380B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecoeden.Catalogue.Api", "Ecoeden.Catalogue.Api\Ecoeden.Catalogue.Api.csproj", "{30ED1C03-9CBF-4DC4-A68F-C982E6D63A9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,30 +21,30 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9B17F15C-ABEF-4982-BD8C-B7F276947323}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9B17F15C-ABEF-4982-BD8C-B7F276947323}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9B17F15C-ABEF-4982-BD8C-B7F276947323}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9B17F15C-ABEF-4982-BD8C-B7F276947323}.Release|Any CPU.Build.0 = Release|Any CPU
-		{59E75124-AC74-4FE9-8B31-EED3ECE2D496}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{59E75124-AC74-4FE9-8B31-EED3ECE2D496}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{59E75124-AC74-4FE9-8B31-EED3ECE2D496}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{59E75124-AC74-4FE9-8B31-EED3ECE2D496}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2F04EC7A-2F4F-4B53-BD36-09067234732B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2F04EC7A-2F4F-4B53-BD36-09067234732B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2F04EC7A-2F4F-4B53-BD36-09067234732B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2F04EC7A-2F4F-4B53-BD36-09067234732B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5CD37449-DBBC-4F0E-88B3-2CD16017B3FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5CD37449-DBBC-4F0E-88B3-2CD16017B3FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5CD37449-DBBC-4F0E-88B3-2CD16017B3FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5CD37449-DBBC-4F0E-88B3-2CD16017B3FB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E7D482CA-CE06-494A-B927-4CC9A086DF05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7D482CA-CE06-494A-B927-4CC9A086DF05}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7D482CA-CE06-494A-B927-4CC9A086DF05}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E7D482CA-CE06-494A-B927-4CC9A086DF05}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E814A8B6-2750-44A6-BCB8-2F68BDC966CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E814A8B6-2750-44A6-BCB8-2F68BDC966CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E814A8B6-2750-44A6-BCB8-2F68BDC966CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E814A8B6-2750-44A6-BCB8-2F68BDC966CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6C060D4-CABF-43F5-92AD-DAAC6E491F34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6C060D4-CABF-43F5-92AD-DAAC6E491F34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6C060D4-CABF-43F5-92AD-DAAC6E491F34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6C060D4-CABF-43F5-92AD-DAAC6E491F34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2A7586D-D2F7-4952-A12C-415B56DA4300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2A7586D-D2F7-4952-A12C-415B56DA4300}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2A7586D-D2F7-4952-A12C-415B56DA4300}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2A7586D-D2F7-4952-A12C-415B56DA4300}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48729A59-56EF-4432-8BE6-85CD2D2CCE1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48729A59-56EF-4432-8BE6-85CD2D2CCE1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48729A59-56EF-4432-8BE6-85CD2D2CCE1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48729A59-56EF-4432-8BE6-85CD2D2CCE1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{626D446C-3A30-43B2-AAEC-264F28C380B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{626D446C-3A30-43B2-AAEC-264F28C380B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{626D446C-3A30-43B2-AAEC-264F28C380B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{626D446C-3A30-43B2-AAEC-264F28C380B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30ED1C03-9CBF-4DC4-A68F-C982E6D63A9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30ED1C03-9CBF-4DC4-A68F-C982E6D63A9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30ED1C03-9CBF-4DC4-A68F-C982E6D63A9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30ED1C03-9CBF-4DC4-A68F-C982E6D63A9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

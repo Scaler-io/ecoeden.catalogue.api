@@ -12,6 +12,7 @@ COPY ["Ecoeden.Catalogue.Application/Ecoeden.Catalogue.Application.csproj", "Eco
 COPY ["Ecoeden.Catalogue.Domain/Ecoeden.Catalogue.Domain.csproj", "Ecoeden.Catalogue.Domain/"]
 COPY ["Ecoeden.Swagger/Ecoeden.Swagger.csproj", "Ecoeden.Swagger/"]
 RUN dotnet restore "./Ecoeden.Catalogue.Api/Ecoeden.Catalogue.Api.csproj"
+
 COPY . .
 WORKDIR "/src/Ecoeden.Catalogue.Api"
 RUN dotnet build "./Ecoeden.Catalogue.Api.csproj" -c Release  -o /app/build
