@@ -12,6 +12,7 @@ stages:
       - job: Build
         displayName: "Build job"
         pool:
+          name: 'Azure Pipelines'
           vmImage: ""
         steps:
           - template: build.yml
