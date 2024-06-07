@@ -6,26 +6,26 @@ parameters:
     type: string
 
 steps:
-  - task: NuGetCommand@2
-    displayName: "Restore solution"
-    inputs:
-      command: "restore"
-      restoreSolution: "**/*.sln"
-      feedsToUse: "select"
+  # - task: NuGetCommand@2
+  #   displayName: "Restore solution"
+  #   inputs:
+  #     command: "restore"
+  #     restoreSolution: "**/*.sln"
+  #     feedsToUse: "select"
 
-  - task: DotNetCoreCLI@2
-    displayName: "Build solution"
-    inputs:
-      command: "build"
-      projects: "**/*.sln"
-      arguments: "--configuration Release"
+  # - task: DotNetCoreCLI@2
+  #   displayName: "Build solution"
+  #   inputs:
+  #     command: "build"
+  #     projects: "**/*.sln"
+  #     arguments: "--configuration Release"
 
   - task: Docker@2
     inputs:
       containerRegistry: "$(dockerHubServiceConnection)"
       repository: "$(imageName)"
       command: "buildAndPush"
-      Dockerfile: "src/Ecoeden.Catalogue.Api/Dockerfile"
+      Dockerfile: "**/Dockerfile"
       tags: |
         $(Build.BuildId)
 
