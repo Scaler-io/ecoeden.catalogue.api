@@ -13,7 +13,7 @@ steps:
 
   # Build Docker image
   - script: |
-      docker build --progress=plain --no-cache -f src/Ecoeden.Catalogue.Api/Dockerfile -t sharthak1995/ecoeden-catalogue-svc:213 .
+      docker build --progress=plain --no-cache -f src/Ecoeden.Catalogue.Api/Dockerfile -t sharthak1995/ecoeden-catalogue-svc:213 src/Ecoeden.Catalogue.Api/.
     displayName: "Build Docker Image"
 
   # Log in to Docker registry
