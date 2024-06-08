@@ -9,7 +9,7 @@ steps:
   # Install Docker Compose
   - task: DockerInstaller@0
     inputs:
-      dockerComposeVersion: "latest"
+      dockerComposeVersion: 17.09.0-ce
 
   # Clean Docker system (optional)
   - task: Docker@2
