@@ -11,7 +11,7 @@ services:
     image: ${DOCKER_REGISTRY-}ecoedencatalogueapi
     build:
       context: .
-      dockerfile: ./Ecoeden.Catalogue.Api/Dockerfile
+      dockerfile: ./Dockerfile
 
 # volumes:
 #   mongo_data:
