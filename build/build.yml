@@ -6,11 +6,6 @@ parameters:
     type: string
 
 steps:
-  # Install Docker (optional if Docker is already available on the agent)
-  - task: DockerInstaller@0
-    inputs:
-      dockerVersion: "latest" # Specify the latest version you need
-
   # Clean Docker system
   - script: |
       docker system prune -a -f
