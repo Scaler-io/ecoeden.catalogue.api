@@ -12,7 +12,7 @@ WORKDIR /src
 
 COPY ["../Ecoeden.Catalogue.Domain/Ecoeden.Catalogue.Domain.csproj", "Ecoeden.Catalogue.Domain/"]
 COPY ["../Ecoeden.Swagger/Ecoeden.Swagger.csproj", "Ecoeden.Swagger/"]
-COPY ["../Ecoeden.Catalogue.Application/Ecoeden.Catalogue.Application.csproj", "Ecoeden.Catalogue.Application/"]
+COPY ["../Ecoeden.catalogue.Application/Ecoeden.catalogue.Application.csproj", "Ecoeden.catalogue.Application/"]
 COPY ["../Ecoeden.Catalogue.Infrastructure/Ecoeden.Catalogue.Infrastructure.csproj", "Ecoeden.Catalogue.Infrastructure/"]
 COPY ["Ecoeden.Catalogue.Api/Ecoeden.Catalogue.Api.csproj", "Ecoeden.Catalogue.Api/"]
 
