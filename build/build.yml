@@ -26,7 +26,7 @@ steps:
       repository: "$(imageName)"
       command: "buildAndPush"
       Dockerfile: "src/Ecoeden.Catalogue.Api/Dockerfile"
-      buildContext: "src/Ecoeden.Catalogue.Api"
+      buildContext: "$(Build.Repository.LocalPath)"
       tags: |
         $(Build.BuildId)
 
