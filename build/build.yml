@@ -11,14 +11,13 @@ steps:
     inputs:
       dockerComposeVersion: 17.09.0-ce
 
-  # Clean Docker system (optional)
-  - task: Docker@2
-    inputs:
-      command: "run"
-      arguments: "--rm docker system prune -a -f"
-    displayName: "Clean Docker System"
-
-    # Build Docker images using docker-compose with override file
+  # # Clean Docker system (optional)
+  # - task: Docker@2
+  #   inputs:
+  #     command: "run"
+  #     arguments: "--rm docker system prune -a -f"
+  #   displayName: "Clean Docker System"
+  # Build Docker images using docker-compose with override file
   - task: DockerCompose@0
     inputs:
       containerregistry: "$(dockerHubServiceConnection)"
