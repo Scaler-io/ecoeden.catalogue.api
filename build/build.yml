@@ -6,32 +6,30 @@ parameters:
     type: string
 
 steps:
-  # - task: NuGetCommand@2
-  #   displayName: "Restore solution"
-  #   inputs:
-  #     command: "restore"
-  #     restoreSolution: "**/*.sln"
-  #     feedsToUse: "select"
-
-  # - task: DotNetCoreCLI@2
-  #   displayName: "Build solution"
-  #   inputs:
-  #     command: "build"
-  #     projects: "**/*.sln"
-  #     arguments: "--configuration Release"
-
-  - task: Docker@2
+  # Install Docker (optional if Docker is already available on the agent)
+  - task: DockerInstaller@0
     inputs:
-      containerRegistry: "$(dockerHubServiceConnection)"
-      repository: "$(imageName)"
-      command: "buildAndPush"
-      Dockerfile: "**/Dockerfile"
-      buildContext: "."
-      tags: |
-        $(Build.BuildId)
+      dockerVersion: "latest" # Specify the latest version you need
 
-  - task: PublishBuildArtifacts@1
-    inputs:
-      PathtoPublish: "$(Build.ArtifactStagingDirectory)"
-      ArtifactName: "drop"
-      publishLocation: "Container"
+  # Clean Docker system
+  - script: |
+      docker system prune -a -f
+    displayName: "Clean Docker System"
+
+  # Build Docker image
+  - script: |
+      docker build --progress=plain --no-cache -f src/Ecoeden.Catalogue.Api/Dockerfile -t sharthak1995/ecoeden-catalogue-svc:213 .
+    displayName: "Build Docker Image"
+
+  # Log in to Docker registry
+  # - script: |
+  #     echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin your-docker-registry
+  #   displayName: "Log in to Docker Registry"
+  #   env:
+  #     DOCKER_USERNAME: $(DOCKER_USERNAME)
+  #     DOCKER_PASSWORD: $(DOCKER_PASSWORD)
+
+  # # Push Docker image
+  # - script: |
+  #     docker push your-docker-registry/ecoeden-catalogue-svc:213
+  #   displayName: "Push Docker Image"
