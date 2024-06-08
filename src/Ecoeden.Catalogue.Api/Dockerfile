@@ -8,15 +8,14 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-
-# Copy everything and restore as distinct layers
+COPY ["Ecoeden.Catalogue.Api/Ecoeden.Catalogue.Api.csproj", "Ecoeden.Catalogue.Api/"]
+COPY ["Ecoeden.Catalogue.Infrastructure/Ecoeden.Catalogue.Infrastructure.csproj", "Ecoeden.Catalogue.Infrastructure/"]
+COPY ["Ecoeden.Catalogue.Application/Ecoeden.Catalogue.Application.csproj", "Ecoeden.Catalogue.Application/"]
+COPY ["Ecoeden.Catalogue.Domain/Ecoeden.Catalogue.Domain.csproj", "Ecoeden.Catalogue.Domain/"]
+COPY ["Ecoeden.Swagger/Ecoeden.Swagger.csproj", "Ecoeden.Swagger/"]
+RUN dotnet restore "./Ecoeden.Catalogue.Api/Ecoeden.Catalogue.Api.csproj"
 COPY . .
-
-# Restore the primary project
-WORKDIR /src/Ecoeden.Catalogue.Api
-RUN dotnet restore "./Ecoeden.Catalogue.Api.csproj"
-
-# Build the project
+WORKDIR "/src/Ecoeden.Catalogue.Api"
 RUN dotnet build "./Ecoeden.Catalogue.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
