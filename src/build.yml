@@ -1,0 +1,17 @@
+# build.yml
+parameters:
+  - name: imageName
+    type: string
+  - name: dockerHubServiceConnection
+    type: string
+
+steps:
+  - task: Docker@2
+    inputs:
+      containerRegistry: "$(dockerHubServiceConnection)"
+      repository: "$(imageName)"
+      command: "buildAndPush"
+      Dockerfile: "**/Dockerfile" # Path to your Dockerfile
+      buildContext: . # Set build context to the root of your repository
+      tags: |
+        $(Build.BuildId)

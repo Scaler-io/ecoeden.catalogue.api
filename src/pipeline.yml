@@ -1,0 +1,36 @@
+trigger:
+  - main
+
+variables:
+  imageName: "sharthak1995/ecoeden-catalogue-svc"
+  dockerHubServiceConnection: "ecoeden-svc"
+
+stages:
+  - stage: Build
+    displayName: "Build stage"
+    jobs:
+      - job: Build
+        displayName: "Build job"
+        pool:
+          name: "Azure Pipelines"
+          vmImage: "ubuntu-latest"
+        steps:
+          - template: build.yml
+            parameters:
+              imageName: $(imageName)
+              dockerHubServiceConnection: $(dockerHubServiceConnection)
+
+  - stage: Deploy
+    displayName: "Deploy Stage"
+    dependsOn: Build
+    condition: succeeded()
+    jobs:
+      - job: Deploy
+        displayName: "Deploy Job"
+        pool:
+          vmImage: "ubuntu-latest"
+        steps:
+          - template: docker-push.yml
+            parameters:
+              imageName: $(imageName)
+              dockerHubServiceConnection: $(dockerHubServiceConnection)
