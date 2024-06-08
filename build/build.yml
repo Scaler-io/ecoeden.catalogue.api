@@ -6,32 +6,39 @@ parameters:
     type: string
 
 steps:
-  # - task: NuGetCommand@2
-  #   displayName: "Restore solution"
-  #   inputs:
-  #     command: "restore"
-  #     restoreSolution: "**/*.sln"
-  #     feedsToUse: "select"
+  # Install Docker Compose
+  - task: DockerInstaller@0
+    inputs:
+      dockerComposeVersion: "latest"
 
-  # - task: DotNetCoreCLI@2
-  #   displayName: "Build solution"
-  #   inputs:
-  #     command: "build"
-  #     projects: "**/*.sln"
-  #     arguments: "--configuration Release"
-
+  # Clean Docker system (optional)
   - task: Docker@2
     inputs:
-      containerRegistry: "$(dockerHubServiceConnection)"
-      repository: "$(imageName)"
-      command: "buildAndPush"
-      Dockerfile: "src/Ecoeden.Catalogue.Api/Dockerfile"
-      buildContext: "$(Build.Repository.LocalPath)"
-      tags: |
-        $(Build.BuildId)
+      command: "run"
+      arguments: "--rm docker system prune -a -f"
+    displayName: "Clean Docker System"
 
-  - task: PublishBuildArtifacts@1
+    # Build Docker images using docker-compose with override file
+  - task: DockerCompose@0
     inputs:
-      PathtoPublish: "$(Build.ArtifactStagingDirectory)"
-      ArtifactName: "drop"
-      publishLocation: "Container"
+      containerregistry: "$(dockerHubServiceConnection)"
+      dockerComposeFile: "**/docker-compose.yml"
+      dockerComposeFileArgs: "-f docker-compose.yml -f docker-compose.override.yml"
+      action: "Build services"
+      additionalImageTags: "$(IMAGE_TAG)"
+    displayName: "Build Docker Images"
+
+    # Log in to Docker Hub (if not using service connection)
+  - task: Docker@2
+    inputs:
+      command: "login"
+      containerRegistry: "$(dockerHubServiceConnection)"
+
+  # Push Docker images to Docker Hub
+  - task: DockerCompose@0
+    inputs:
+      containerregistry: "$(dockerHubServiceConnection)"
+      dockerComposeFile: "**/docker-compose.yml"
+      dockerComposeFileArgs: "-f docker-compose.yml -f docker-compose.override.yml"
+      action: "Push services"
+    displayName: "Push Docker Images"

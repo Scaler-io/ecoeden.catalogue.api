@@ -6,11 +6,12 @@ services:
   
   mongoexpress:
     image: mongo-express
-  # ecoeden.catalogue.api:
-  #   image: ${DOCKER_REGISTRY-}ecoedencatalogueapi
-  #   build:
-  #     context: .
-  #     dockerfile: Ecoeden.Catalogue.Api/Dockerfile
+    
+  ecoeden.catalogue.api:
+    image: ${DOCKER_REGISTRY-}ecoedencatalogueapi
+    build:
+      context: .
+      dockerfile: Ecoeden.Catalogue.Api/Dockerfile
 
 volumes:
   mongo_data:

@@ -23,9 +23,9 @@ services:
     networks:
      - ecoeden_dev_net
 
-  # ecoeden.catalogue.api:
-  #   environment:
-  #     - ASPNETCORE_ENVIRONMENT=Development
-  #     - ASPNETCORE_HTTP_PORTS=8080
-  #   ports:
-  #     - "5003:8080"
+  ecoeden.catalogue.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - "5003:8080"
