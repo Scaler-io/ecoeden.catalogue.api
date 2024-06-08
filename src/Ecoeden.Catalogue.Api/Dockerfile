@@ -8,12 +8,14 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Ecoeden.Catalogue.Api/Ecoeden.Catalogue.Api.csproj", "Ecoeden.Catalogue.Api/"]
-COPY ["Ecoeden.Swagger/Ecoeden.Swagger.csproj", "Ecoeden.Swagger/"]
-COPY ["Ecoeden.Catalogue.Infrastructure/Ecoeden.Catalogue.Infrastructure.csproj", "Ecoeden.Catalogue.Infrastructure/"]
-COPY ["Ecoeden.Catalogue.Application/Ecoeden.Catalogue.Application.csproj", "Ecoeden.Catalogue.Application/"]
 COPY ["Ecoeden.Catalogue.Domain/Ecoeden.Catalogue.Domain.csproj", "Ecoeden.Catalogue.Domain/"]
+COPY ["Ecoeden.Swagger/Ecoeden.Swagger.csproj", "Ecoeden.Swagger/"]
+COPY ["Ecoeden.Catalogue.Application/Ecoeden.Catalogue.Application.csproj", "Ecoeden.Catalogue.Application/"]
+COPY ["Ecoeden.Catalogue.Infrastructure/Ecoeden.Catalogue.Infrastructure.csproj", "Ecoeden.Catalogue.Infrastructure/"]
+COPY ["Ecoeden.Catalogue.Api/Ecoeden.Catalogue.Api.csproj", "Ecoeden.Catalogue.Api/"]
+
 RUN dotnet restore "./Ecoeden.Catalogue.Api/Ecoeden.Catalogue.Api.csproj"
+
 COPY . .
 WORKDIR "/src/Ecoeden.Catalogue.Api"
 RUN dotnet build "./Ecoeden.Catalogue.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
