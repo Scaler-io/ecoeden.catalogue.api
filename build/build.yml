@@ -22,7 +22,7 @@ steps:
     inputs:
       containerregistry: "$(dockerHubServiceConnection)"
       dockerComposeFile: "**/docker-compose.yml"
-      dockerComposeFileArgs: "-f docker-compose.yml -f docker-compose.override.yml"
+      additionalDockerComposeFiles: "**/docker-compose.override.yml"
       action: "Build services"
       additionalImageTags: "$(IMAGE_TAG)"
     displayName: "Build Docker Images"
