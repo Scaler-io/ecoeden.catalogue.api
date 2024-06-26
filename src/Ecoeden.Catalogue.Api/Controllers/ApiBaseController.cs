@@ -3,6 +3,7 @@ using Ecoeden.Catalogue.Api.Services;
 using Ecoeden.Catalogue.Domain.Models.Core;
 using Ecoeden.Catalogue.Domain.Models.Dtos;
 using Ecoeden.Catalogue.Domain.Models.Enums;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -53,5 +54,30 @@ public class ApiBaseController(ILogger logger, IIdentityService identityService)
                 "application/json"
             ]
         };
+    }
+
+    protected IActionResult ProcessValidationResult(ValidationResult validationResult)
+    {
+        var errors = validationResult.Errors;
+        var validationError = new ApiValidationResponse()
+        {
+            Errors = []
+        };
+
+        validationError.Errors.AddRange(
+         errors.Select(error => new FieldLevelError
+         {
+             Code = error.ErrorCode,
+             Field = error.PropertyName,
+             Message = error.ErrorMessage
+         })
+        );
+
+        return new BadRequestObjectResult(validationError);
+    }
+
+    public static bool IsInvalidResult(ValidationResult validationResult)
+    {
+        return validationResult != null && !validationResult.IsValid;
     }
 }

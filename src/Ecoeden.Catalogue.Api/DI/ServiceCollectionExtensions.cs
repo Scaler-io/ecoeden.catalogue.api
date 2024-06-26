@@ -6,6 +6,7 @@ using Ecoeden.Catalogue.Domain.Configurations;
 using Ecoeden.Catalogue.Domain.Models.Core;
 using Ecoeden.Catalogue.Domain.Models.Enums;
 using Ecoeden.Swagger;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -45,6 +46,7 @@ public static class ServiceCollectionExtensions
         services.AddTransient<GlobalExceptionMiddleware>();
 
         services.AddEndpointsApiExplorer();
+        services.AddSwaggerExamplesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
         services.AddSwaggerExamples();
         services.AddSwaggerGen(options =>
         {

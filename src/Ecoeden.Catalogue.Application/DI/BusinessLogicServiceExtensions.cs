@@ -1,6 +1,5 @@
 ﻿using Ecoeden.Catalogue.Application.Contracts.Security;
 using Ecoeden.Catalogue.Infrastructure.Security;
-using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -14,7 +13,7 @@ public static class BusinessLogicServiceExtensions
         
         services.AddMediatR(Assembly.GetExecutingAssembly());
 
-        services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+        services.AddValidators();
 
         services.AddScoped<IPermissionMapper, PermissionMapper>();
 

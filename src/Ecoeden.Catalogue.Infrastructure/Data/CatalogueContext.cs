@@ -3,16 +3,10 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace Ecoeden.Catalogue.Infrastructure.Data;
-public sealed class CatalogueContext : ICatalogueContext
+public sealed class CatalogueContext(IOptions<MongoDbOption> mongoDbOption, MongoClient client) 
+    : ICatalogueContext
 {
-
-    private readonly IMongoDatabase _mongoDatabase;
-
-    public CatalogueContext(IOptions<MongoDbOption> mongoDbOption)
-    {
-        var client = new MongoClient(mongoDbOption.Value.ConnectionString);
-        _mongoDatabase = client.GetDatabase(mongoDbOption.Value.Database);
-    }
+    private readonly IMongoDatabase _mongoDatabase = client.GetDatabase(mongoDbOption.Value.Database);
 
     public IMongoDatabase GetDatabaseInstance()
     {

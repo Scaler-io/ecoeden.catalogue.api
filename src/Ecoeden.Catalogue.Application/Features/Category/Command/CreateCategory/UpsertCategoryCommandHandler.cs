@@ -29,6 +29,7 @@ public sealed class UpsertCategoryCommandHandler(ILogger logger,
 
         Domain.Entities.Category category = new(request.Name)
         {
+            Id = request.Id,
             CreatedBy = request.RequestInformation.CurrentUser.Id,
         };
 

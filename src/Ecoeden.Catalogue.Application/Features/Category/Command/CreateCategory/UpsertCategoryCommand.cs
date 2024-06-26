@@ -4,8 +4,9 @@ using MediatR;
 
 namespace Ecoeden.Catalogue.Application.Features.Category.Command.CreateCategory;
 
-public sealed class UpsertCategoryCommand(string name, RequestInformation requestInformation) : IRequest<Result<CategoryDto>>
+public sealed class UpsertCategoryCommand(CategoryDto category, RequestInformation requestInformation) : IRequest<Result<CategoryDto>>
 {
-    public string Name { get; set; } = name;
+    public string Id { get; set; } = category.Id;
+    public string Name { get; set; } = category.Name;
     public RequestInformation RequestInformation { get; set;} = requestInformation;
 }
