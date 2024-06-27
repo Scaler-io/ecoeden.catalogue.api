@@ -17,6 +17,8 @@ using Ecoeden.Swagger.Examples;
 using Ecoeden.Catalogue.Domain.Models.Dtos;
 using FluentValidation;
 using Ecoeden.Catalogue.Application.Features.Category.Query.GetAllCategories;
+using Ecoeden.Catalogue.Application.Features.Category.Command.DeleteCategory;
+using Ecoeden.Catalogue.Application.Features.Category.Query.GetCategory;
 
 namespace Ecoeden.Catalogue.Api.Controllers.v2;
 
@@ -61,6 +63,9 @@ public class CategoryController(ILogger logger, IIdentityService identityService
     // 200
     [ProducesResponseType(typeof(List<CategoryDto>), (int)HttpStatusCode.OK)]
     [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(GetAllCategoriesExample))]
+    // 404
+    [ProducesResponseType(typeof(ApiResponse), (int)HttpStatusCode.NotFound)]
+    [SwaggerResponseExample((int)HttpStatusCode.NotFound, typeof(NotFoundResponseExample))]
     // 500
     [ProducesResponseType(typeof(ApiExceptionResponse), (int)HttpStatusCode.InternalServerError)]
     [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(InternalServerResponseExample))]
@@ -74,4 +79,45 @@ public class CategoryController(ILogger logger, IIdentityService identityService
         return OkOrFailure(result);
     }
 
+    [HttpGet("category/{id}")]
+    [SwaggerHeader("CorrelationId", Description = "expects unique correlation id")]
+    [SwaggerOperation(OperationId = "CreateOrUpdateCategory", Description = "Gets all categories")]
+    // 200
+    [ProducesResponseType(typeof(CategoryDto), (int)HttpStatusCode.OK)]
+    [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(GetCategoryExample))]
+    // 404
+    [ProducesResponseType(typeof(ApiResponse), (int)HttpStatusCode.NotFound)]
+    [SwaggerResponseExample((int)HttpStatusCode.NotFound, typeof(NotFoundResponseExample))]
+    // 500
+    [ProducesResponseType(typeof(ApiExceptionResponse), (int)HttpStatusCode.InternalServerError)]
+    [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(InternalServerResponseExample))]
+    [RequirePermission(ApiAccess.InventoryRead)]
+    public async Task<IActionResult> GetCategoryById([FromRoute] string id)
+    {
+        Logger.Here().MethodEntered();
+        var getQuery = new GetCategoryQuery(id);
+        var result = await _mediator.Send(getQuery);
+        Logger.Here().MethodExited();
+        return OkOrFailure(result);
+    }
+
+
+    [HttpDelete("category/{id}")]
+    [SwaggerHeader("CorrelationId", Description = "expects unique correlation id")]
+    [SwaggerOperation(OperationId = "CreateOrUpdateCategory", Description = "Gets all categories")]
+    // 404
+    [ProducesResponseType(typeof(ApiResponse), (int)HttpStatusCode.NotFound)]
+    [SwaggerResponseExample((int)HttpStatusCode.NotFound, typeof(NotFoundResponseExample))]
+    // 500
+    [ProducesResponseType(typeof(ApiExceptionResponse), (int)HttpStatusCode.InternalServerError)]
+    [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(InternalServerResponseExample))]
+    [RequirePermission(ApiAccess.InventoryWrite)]
+    public async Task<IActionResult> DeleteCategory([FromRoute] string id)
+    {
+        Logger.Here().MethodEntered();
+        var deleteQuery = new DeleteCategoryCommand(id);
+        var result = await _mediator.Send(deleteQuery);
+        Logger.Here().MethodExited();
+        return OkOrFailure(result);
+    }
 }

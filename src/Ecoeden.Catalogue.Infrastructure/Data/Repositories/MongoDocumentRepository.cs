@@ -9,7 +9,7 @@ public sealed class MongoDocumentRepository<T>(ICatalogueContext context) : IDoc
 {
     private readonly IMongoDatabase _database = context.GetDatabaseInstance();
 
-    public async Task<IReadOnlyCollection<T>> GetAllAsync(string collectionName)
+    public async Task<IReadOnlyList<T>> GetAllAsync(string collectionName)
     {
         var collection = GetCollection(collectionName);
         return await collection.Find(itrm => true).ToListAsync();
@@ -65,5 +65,10 @@ public sealed class MongoDocumentRepository<T>(ICatalogueContext context) : IDoc
     private IMongoCollection<T> GetCollection(string collectionName)
     {
         return _database.GetCollection<T>(collectionName);
+    }
+
+    public async Task<bool> Exists(Expression<Func<T, bool>> predicate, string collectionName)
+    {
+        return await GetByPredicateAsync(predicate, collectionName) is not null;
     }
 }

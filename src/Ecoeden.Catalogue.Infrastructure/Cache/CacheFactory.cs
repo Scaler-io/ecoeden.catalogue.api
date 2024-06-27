@@ -13,6 +13,7 @@ internal class CacheFactory(IServiceProvider serviceProvider) : ICacheFactory
         return type switch
         {
             CacheServiceTypes.Distributed => _serviceProvider.GetRequiredService<DistributedCacheService>(),
+            CacheServiceTypes.InMemory => _serviceProvider.GetRequiredService<InMemoryCacheService>(),
             _ => throw new ArgumentException($"Unsupported cache service type: {type}", nameof(type))
         };
     }

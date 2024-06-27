@@ -21,7 +21,7 @@ public sealed class UpsertCategoryCommandHandler(ILogger logger,
     private readonly ICacheService _cacheService = cacheFactory.CreateService(CacheServiceTypes.Distributed);
     private readonly IDocumentRepository<Domain.Entities.Category> _categoryRepository = categoryRepository;
     private readonly IMapper _mapper = mapper;
-    private const string CATEGORY_CACHE_KEY = "category";
+    private const string CATEGORY_CACHE_KEY = "category_cache";
 
     public async Task<Result<CategoryDto>> Handle(UpsertCategoryCommand request, CancellationToken cancellationToken)
     {
@@ -32,6 +32,15 @@ public sealed class UpsertCategoryCommandHandler(ILogger logger,
             Id = request.Id,
             CreatedBy = request.RequestInformation.CurrentUser.Id,
         };
+
+        var categoryExists = await _categoryRepository.Exists(category => category.Name.ToLower() == request.Name.ToLower(),
+            MongoDbCollectionNames.Categories);
+
+        if (categoryExists)
+        {
+            _logger.Here().Error("The category {name} already exists", request.Name);
+            return Result<CategoryDto>.Faliure(ErrorCodes.BadRequest, "Category name already exists");
+        }
 
         await _categoryRepository.UpsertAsync(category, MongoDbCollectionNames.Categories);
 

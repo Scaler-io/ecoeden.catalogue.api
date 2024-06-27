@@ -10,7 +10,7 @@ using Ecoeden.Catalogue.Domain.Models.Enums;
 using MediatR;
 
 namespace Ecoeden.Catalogue.Application.Features.Category.Query.GetAllCategories;
-public class GetAllCategoriesQueryHandler(ILogger logger, 
+public sealed class GetAllCategoriesQueryHandler(ILogger logger, 
     IDocumentRepository<Domain.Entities.Category> categoryRepository,
     ICacheFactory cacheFactory,
     IMapper mapper
@@ -20,7 +20,7 @@ public class GetAllCategoriesQueryHandler(ILogger logger,
     private readonly IMapper _mapper = mapper;
     private readonly ICacheService _cacheService = cacheFactory.CreateService(CacheServiceTypes.Distributed);
     private readonly IDocumentRepository<Domain.Entities.Category> _categoryRepository = categoryRepository;
-    private const string CATEGORY_CACHE_KEY = "category_cache";
+    private const string CATEGORY_CACHE_KEY = "category_cache";  
 
     public async Task<Result<IReadOnlyList<CategoryDto>>> Handle(GetAllCategoriesQuery request, CancellationToken cancellationToken)
     {
@@ -28,7 +28,7 @@ public class GetAllCategoriesQueryHandler(ILogger logger,
         _logger.Here().Information("Request - get all categories");
 
         var cacheResult = await _cacheService.GetAsync<IReadOnlyList<CategoryDto>>(CATEGORY_CACHE_KEY, cancellationToken);
-        if (cacheResult is not null)
+        if (cacheResult is not null && cacheResult.Count != 0)
         {
             _logger.Here().Information("GetAllCategories - cache hit");
             return Result<IReadOnlyList<CategoryDto>>.Success(cacheResult);
@@ -36,7 +36,7 @@ public class GetAllCategoriesQueryHandler(ILogger logger,
 
         var categories = await _categoryRepository.GetAllAsync(MongoDbCollectionNames.Categories);
 
-        if(categories is null)
+        if(categories is null || categories.Count == 0)
         {
             _logger.Here().Error("No categories were found");
             return Result<IReadOnlyList<CategoryDto>>.Faliure(ErrorCodes.NotFound);

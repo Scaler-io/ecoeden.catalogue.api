@@ -18,6 +18,7 @@ public static class InfrastructureServiceExtensions
     {
         services.AddScoped<ICacheFactory, CacheFactory>();
         services.AddScoped<DistributedCacheService>();
+        services.AddScoped<InMemoryCacheService>();
 
         services.AddScoped<IHealthCheck, DbHealthCheck>();
         services.AddScoped<IHealthCheckConfiguration, HealthCheckConfiguration>();
