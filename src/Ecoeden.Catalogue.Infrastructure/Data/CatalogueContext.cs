@@ -12,4 +12,16 @@ public sealed class CatalogueContext(IOptions<MongoDbOption> mongoDbOption, Mong
     {
         return _mongoDatabase;
     }
+    public async Task<bool> IsDbConnectionWorking()
+    {
+        try
+        {
+            await _mongoDatabase.ListCollectionNamesAsync();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }

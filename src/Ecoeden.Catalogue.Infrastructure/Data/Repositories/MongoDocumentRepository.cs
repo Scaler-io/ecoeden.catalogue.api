@@ -71,4 +71,5 @@ public sealed class MongoDocumentRepository<T>(ICatalogueContext context) : IDoc
     {
         return await GetByPredicateAsync(predicate, collectionName) is not null;
     }
+    
 }
