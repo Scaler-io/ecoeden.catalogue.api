@@ -9,6 +9,7 @@ internal static class RegisteredValidatorContext
     internal static IServiceCollection AddValidators(this IServiceCollection services)
     {
         services.AddScoped<IValidator<CategoryDto>, CategoryValidators>();
+        services.AddScoped<IValidator<ProductDto>, ProductValidators>();
         return services;
     }
 }

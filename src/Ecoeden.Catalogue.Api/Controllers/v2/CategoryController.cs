@@ -19,6 +19,7 @@ using FluentValidation;
 using Ecoeden.Catalogue.Application.Features.Category.Query.GetAllCategories;
 using Ecoeden.Catalogue.Application.Features.Category.Command.DeleteCategory;
 using Ecoeden.Catalogue.Application.Features.Category.Query.GetCategory;
+using Ecoeden.Swagger.Examples.Product;
 
 namespace Ecoeden.Catalogue.Api.Controllers.v2;
 
@@ -37,7 +38,7 @@ public class CategoryController(ILogger logger, IIdentityService identityService
     [SwaggerOperation(OperationId = "CreateOrUpdateCategory", Description = "creates new category")]
     // 200
     [ProducesResponseType(typeof(CreateOrUpdateCategoryResponseExample), (int)HttpStatusCode.OK)]
-    [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(CreateOrUpdateCategoryResponseExample))]
+    [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(ProductResponseExample))]
     // 500
     [ProducesResponseType(typeof(ApiExceptionResponse), (int)HttpStatusCode.InternalServerError)]
     [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(InternalServerResponseExample))]

@@ -29,18 +29,28 @@ public sealed class UpsertCategoryCommandHandler(ILogger logger,
 
         Domain.Entities.Category category = new(request.Name)
         {
-            Id = request.Id,
-            CreatedBy = request.RequestInformation.CurrentUser.Id,
+            Id = request.Id
         };
 
-        var categoryExists = await _categoryRepository.Exists(category => category.Name.ToLower() == request.Name.ToLower(),
+        var existingCategory = await _categoryRepository.GetByPredicateAsync(category => category.Name.Equals(request.Name, StringComparison.CurrentCultureIgnoreCase),
             MongoDbCollectionNames.Categories);
 
-        if (categoryExists)
+        if (existingCategory is not null && string.IsNullOrEmpty(request.Id))
         {
             _logger.Here().Error("The category {name} already exists", request.Name);
             return Result<CategoryDto>.Faliure(ErrorCodes.BadRequest, "Category name already exists");
         }
+
+        if (string.IsNullOrEmpty(request.Id))
+        {
+            category.UpdateCreationData(request.RequestInformation.CurrentUser.Id);
+        }
+        else
+        {
+            category = existingCategory;
+            category.UpdateUpdationData(request.RequestInformation.CurrentUser.Id);
+        }
+           
 
         await _categoryRepository.UpsertAsync(category, MongoDbCollectionNames.Categories);
 

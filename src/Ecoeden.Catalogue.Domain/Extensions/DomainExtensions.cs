@@ -24,8 +24,12 @@ public static class DomainExtensions
         return slug;
     }
 
-    public static string GetSku(this string input)
-    {
-        return "ECO" + input.Substring(input.Length - 6) + new Random().Next(100, 999);
+    public static string GetSku(string initial = "")
+    {       
+        if (!string.IsNullOrEmpty(initial))
+        {
+            return "ECO" + initial+ new Random().Next(1000, 9999);
+        }
+        return "ECO" + new Random().Next(1000, 9999);
     }
 }
