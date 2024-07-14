@@ -58,8 +58,8 @@ public class SwaggerConfiguration
             });
         }
 
-        options.DocumentFilter<SwaggerBasePath>();
-        options.DocumentFilter<SwaggerRemoveVersionFromRoute>();
+        //options.DocumentFilter<SwaggerBasePath>();
+        //options.DocumentFilter<SwaggerRemoveVersionFromRoute>();
         options.UseInlineDefinitionsForEnums();
 
         options.ExampleFilters();

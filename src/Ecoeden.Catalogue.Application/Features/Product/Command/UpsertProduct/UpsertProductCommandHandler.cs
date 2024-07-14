@@ -44,17 +44,14 @@ public sealed class UpsertProductCommandHandler(IMapper mapper,
         if (string.IsNullOrEmpty(request.Id))
         {
             product.UpdateCreationData(request.RequestInformation.CurrentUser.Id);
+            await _productRepository.UpsertAsync(product, MongoDbCollectionNames.Products);
         }
         else
         {
-            product = existingProduct;
-            product.UpdateUpdationData(request.RequestInformation.CurrentUser.Id);
+            existingProduct = product;
+            existingProduct.UpdateUpdationData(request.RequestInformation.CurrentUser.Id);
+            await _cacheService.RemoveAsync(PRODUCT_CACHE_KEY, cancellationToken);
         }
-            
-
-        await _productRepository.UpsertAsync(product, MongoDbCollectionNames.Products);
-
-        await _cacheService.RemoveAsync(PRODUCT_CACHE_KEY, cancellationToken);
 
         var dto = _mapper.Map<ProductDto>(product);
 

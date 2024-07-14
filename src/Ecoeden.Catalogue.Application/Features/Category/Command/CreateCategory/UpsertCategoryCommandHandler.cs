@@ -27,7 +27,7 @@ public sealed class UpsertCategoryCommandHandler(ILogger logger,
     {
         _logger.Here().MethodEntered();
 
-        Domain.Entities.Category category = new(request.Name)
+        Domain.Entities.Category category = new(request.Name, request.ImageFile)
         {
             Id = request.Id
         };
@@ -44,16 +44,15 @@ public sealed class UpsertCategoryCommandHandler(ILogger logger,
         if (string.IsNullOrEmpty(request.Id))
         {
             category.UpdateCreationData(request.RequestInformation.CurrentUser.Id);
+            await _categoryRepository.UpsertAsync(category, MongoDbCollectionNames.Categories);
         }
         else
         {
-            category = existingCategory;
-            category.UpdateUpdationData(request.RequestInformation.CurrentUser.Id);
+            existingCategory = category;
+            existingCategory.UpdateUpdationData(request.RequestInformation.CurrentUser.Id);
+            await _categoryRepository.UpsertAsync(existingCategory, MongoDbCollectionNames.Categories);
         }
            
-
-        await _categoryRepository.UpsertAsync(category, MongoDbCollectionNames.Categories);
-
         await _cacheService.RemoveAsync(CATEGORY_CACHE_KEY, cancellationToken);
 
         var dto = _mapper.Map<CategoryDto>(category);

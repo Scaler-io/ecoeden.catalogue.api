@@ -12,6 +12,7 @@ public sealed class UpsertProductCommand(ProductDto productDto, RequestInformati
     public string Description { get; set; } = productDto.Description;
     public string Category { get; set; } = productDto.Category;
     public decimal Price { get; set; } = productDto.Price;
+    public string ImageFile { get; set; } = productDto.ImageFile;
     public RequestInformation RequestInformation { get; set; } = requestInformation;
 
 }

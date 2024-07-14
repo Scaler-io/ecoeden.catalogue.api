@@ -1,31 +1,31 @@
 version: '3.4'
 
 services:
-  # mongodb:
-  #   image: mongo
-  #   container_name: mongodb
-  #   ports:
-  #    - 27017:27017
-  #   volumes:
-  #    - mongo_data:/data/db
-  #   networks:
-  #    - ecoeden_dev_net
-
-  # mongoexpress:
-  #   container_name: mongoexpress
-  #   ports:
-  #     - 8081:8081
-  #   environment:
-  #     - ME_CONFIG_OPTIONS_EDITORTHEME=yonce
-  #     - ME_CONFIG_MONGODB_SERVER=mongodb
-  #   depends_on:
-  #     - mongodb
-  #   networks:
-  #    - ecoeden_dev_net
-
-  ecoeden.catalogue.api:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_HTTP_PORTS=8080
+  mongodb:
+    image: mongo
+    container_name: mongodb
     ports:
-      - "5003:8080"
+     - 27017:27017
+    volumes:
+     - mongo_data:/data/db
+    networks:
+     - ecoeden_dev_net
+
+  mongoexpress:
+    container_name: mongoexpress
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_OPTIONS_EDITORTHEME=yonce
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    depends_on:
+      - mongodb
+    networks:
+     - ecoeden_dev_net
+
+  # ecoeden.catalogue.api:
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - ASPNETCORE_HTTP_PORTS=8080
+  #   ports:
+  #     - "5003:8080"

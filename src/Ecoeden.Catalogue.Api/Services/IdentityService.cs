@@ -1,4 +1,5 @@
 ﻿using Ecoeden.Catalogue.Domain.Models.Dtos;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -19,11 +20,16 @@ public class IdentityService(IHttpContextAccessor contextAccessor) : IIdentitySe
 
     public UserDto PrepareUser()
     {
-        var claims = _contextAccessor.HttpContext.User.Claims;
         var token = _contextAccessor.HttpContext.Request.Headers.Authorization;
+        var claims = _contextAccessor.HttpContext.User.Claims;
+
+        if (claims.IsNullOrEmpty())
+        {
+            return null;
+        }
 
         var roleString = claims.Where(c => c.Type == RoleClaim).FirstOrDefault().Value;
-        var permissionsString = claims.Where(c => c.Type == PermissionClaim).First().Value;
+        var permissionsString = claims.Where(c => c.Type == PermissionClaim).FirstOrDefault().Value;
 
         return new UserDto
         {

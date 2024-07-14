@@ -8,5 +8,6 @@ public sealed class UpsertCategoryCommand(CategoryDto category, RequestInformati
 {
     public string Id { get; set; } = category.Id;
     public string Name { get; set; } = category.Name;
+    public string ImageFile { get; set; } = category.ImageFile;
     public RequestInformation RequestInformation { get; set;} = requestInformation;
 }

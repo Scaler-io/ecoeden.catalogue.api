@@ -15,7 +15,7 @@ public class ProductResponseExample : IExamplesProvider<ProductDto>
             Category = "Sample category",
             Price = 12.5M,
             Slug = "Sample product".GetSlug(),
-            SKU = "Sample product".GetSku()
+            SKU =  DomainExtensions.GetSku()
         };
     }
 }
