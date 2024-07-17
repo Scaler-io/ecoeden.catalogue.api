@@ -17,6 +17,7 @@ using System.Net;
 using Ecoeden.Swagger.Examples.Product;
 using Microsoft.AspNetCore.Authorization;
 using Ecoeden.Catalogue.Application.Features.Product.Query.GetAllProducts;
+using Ecoeden.Catalogue.Application.Features.Product.Query.GetProductById;
 
 namespace Ecoeden.Catalogue.Api.Controllers.v2;
 
@@ -83,4 +84,25 @@ IMediator mediator)
         return OkOrFailure(result);
     }
 
+    [HttpGet("products/{id}")]
+    [SwaggerHeader("CorrelationId", Description = "expects unique correlation id")]
+    [SwaggerOperation(OperationId = "GetProductById", Description = "Fetches products by its id")]
+    // 200
+    [ProducesResponseType(typeof(ProductDto), (int)HttpStatusCode.OK)]
+    [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(ProductResponseExample))]
+    // 400
+    [ProducesResponseType(typeof(ApiValidationResponse), (int)HttpStatusCode.InternalServerError)]
+    [SwaggerResponseExample((int)HttpStatusCode.BadRequest, typeof(BadRequestResponseExample))]
+    // 500
+    [ProducesResponseType(typeof(ApiExceptionResponse), (int)HttpStatusCode.InternalServerError)]
+    [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(InternalServerResponseExample))]
+    [RequirePermission(ApiAccess.InventoryRead)]
+    public async Task<IActionResult> GetProductById([FromRoute] string id)
+    {
+        Logger.Here().MethodEntered();
+        var query = new GetProductByIdQuery(id);
+        var result = await _mediator.Send(query);
+        Logger.Here().MethodExited();
+        return OkOrFailure(result);
+    }
 }
