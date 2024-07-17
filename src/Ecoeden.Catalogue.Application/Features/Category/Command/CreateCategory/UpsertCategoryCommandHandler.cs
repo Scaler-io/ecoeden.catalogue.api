@@ -1,27 +1,30 @@
 ﻿using AutoMapper;
 using Ecoeden.Catalogue.Application.Contracts.Cache;
+using Ecoeden.Catalogue.Application.Contracts.CQRS;
 using Ecoeden.Catalogue.Application.Contracts.Data;
 using Ecoeden.Catalogue.Application.Extensions;
 using Ecoeden.Catalogue.Application.Factories;
+using Ecoeden.Catalogue.Domain.Configurations;
 using Ecoeden.Catalogue.Domain.Models.Constants;
 using Ecoeden.Catalogue.Domain.Models.Core;
 using Ecoeden.Catalogue.Domain.Models.Dtos;
 using Ecoeden.Catalogue.Domain.Models.Enums;
-using MediatR;
+using Microsoft.Extensions.Options;
 
 namespace Ecoeden.Catalogue.Application.Features.Category.Command.CreateCategory;
 
 public sealed class UpsertCategoryCommandHandler(ILogger logger,
     ICacheFactory cacheFactory,
     IDocumentRepository<Domain.Entities.Category> categoryRepository,
-    IMapper mapper) 
-    : IRequestHandler<UpsertCategoryCommand, Result<CategoryDto>>
+    IMapper mapper,
+    IOptions<AppConfigOption> appConfigOptions) 
+    : ICommandHandler<UpsertCategoryCommand, Result<CategoryDto>>
 {
     private readonly ILogger _logger = logger;
     private readonly ICacheService _cacheService = cacheFactory.CreateService(CacheServiceTypes.Distributed);
     private readonly IDocumentRepository<Domain.Entities.Category> _categoryRepository = categoryRepository;
     private readonly IMapper _mapper = mapper;
-    private const string CATEGORY_CACHE_KEY = "category_cache";
+    private readonly AppConfigOption _appConfig = appConfigOptions.Value;
 
     public async Task<Result<CategoryDto>> Handle(UpsertCategoryCommand request, CancellationToken cancellationToken)
     {
@@ -32,6 +35,7 @@ public sealed class UpsertCategoryCommandHandler(ILogger logger,
             Id = request.Id
         };
 
+        CategoryDto dto = new();
         var existingCategory = await _categoryRepository.GetByPredicateAsync(category => category.Name.Equals(request.Name, StringComparison.CurrentCultureIgnoreCase),
             MongoDbCollectionNames.Categories);
 
@@ -45,21 +49,27 @@ public sealed class UpsertCategoryCommandHandler(ILogger logger,
         {
             category.UpdateCreationData(request.RequestInformation.CurrentUser.Id);
             await _categoryRepository.UpsertAsync(category, MongoDbCollectionNames.Categories);
+            dto = _mapper.Map<CategoryDto>(category);
         }
         else
         {
-            existingCategory = category;
-            existingCategory.UpdateUpdationData(request.RequestInformation.CurrentUser.Id);
+            MapUpdateCategoryEntity(request, category, existingCategory);
             await _categoryRepository.UpsertAsync(existingCategory, MongoDbCollectionNames.Categories);
+            dto = _mapper.Map<CategoryDto>(existingCategory);
         }
-           
-        await _cacheService.RemoveAsync(CATEGORY_CACHE_KEY, cancellationToken);
 
-        var dto = _mapper.Map<CategoryDto>(category);
+        await _cacheService.RemoveAsync(_appConfig.CategoryCacheKey, cancellationToken);
 
         _logger.Here().Information("Category created/updated successfully");
         _logger.Here().MethodExited();
 
         return Result<CategoryDto>.Success(dto);
+    }
+
+    private static void MapUpdateCategoryEntity(UpsertCategoryCommand request, Domain.Entities.Category category, Domain.Entities.Category? existingCategory)
+    {
+        existingCategory.Name = category.Name;
+        existingCategory.ImageFile = category.ImageFile;
+        existingCategory.UpdateUpdationData(request.RequestInformation.CurrentUser.Id);
     }
 }

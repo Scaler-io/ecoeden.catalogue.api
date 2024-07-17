@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
+using Ecoeden.Catalogue.Application.Contracts.CQRS;
 using Ecoeden.Catalogue.Application.Contracts.Data;
 using Ecoeden.Catalogue.Application.Extensions;
 using Ecoeden.Catalogue.Domain.Models.Constants;
 using Ecoeden.Catalogue.Domain.Models.Core;
 using Ecoeden.Catalogue.Domain.Models.Dtos;
 using Ecoeden.Catalogue.Domain.Models.Enums;
-using MediatR;
 
 namespace Ecoeden.Catalogue.Application.Features.Category.Query.GetCategory;
 public sealed class GetCategoryQueryHandler(ILogger logger, 
     IDocumentRepository<Domain.Entities.Category> categoryRepository,
     IMapper mapper) 
-    : IRequestHandler<GetCategoryQuery, Result<CategoryDto>>
+    : IQueryHandler<GetCategoryQuery, Result<CategoryDto>>
 {
     private readonly ILogger _logger = logger;
     private readonly IMapper _mapper = mapper;

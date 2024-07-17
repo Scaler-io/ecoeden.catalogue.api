@@ -1,11 +1,11 @@
-﻿using Ecoeden.Catalogue.Domain.Models.Core;
+﻿using Ecoeden.Catalogue.Application.Contracts.CQRS;
+using Ecoeden.Catalogue.Domain.Models.Core;
 using Ecoeden.Catalogue.Domain.Models.Dtos;
-using MediatR;
 
 namespace Ecoeden.Catalogue.Application.Features.Product.Command.UpsertProduct;
 
 public sealed class UpsertProductCommand(ProductDto productDto, RequestInformation requestInformation)
-    : IRequest<Result<ProductDto>>
+    : ICommand<Result<ProductDto>>
 {
     public string Id { get; set; } = productDto.Id;
     public string Name { get; set; } = productDto.Name;

@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
+using Ecoeden.Catalogue.Application.Contracts.CQRS;
 using Ecoeden.Catalogue.Application.Contracts.Data;
 using Ecoeden.Catalogue.Application.Extensions;
 using Ecoeden.Catalogue.Domain.Models.Constants;
 using Ecoeden.Catalogue.Domain.Models.Core;
 using Ecoeden.Catalogue.Domain.Models.Dtos;
 using Ecoeden.Catalogue.Domain.Models.Enums;
-using MediatR;
 
 namespace Ecoeden.Catalogue.Application.Features.Product.Query.GetProductById;
 public sealed class GetProductByIdHandler(ILogger logger, 
     IMapper mapper, 
     IDocumentRepository<Domain.Entities.Product> productRepository) 
-    : IRequestHandler<GetProductByIdQuery, Result<ProductDto>>
+    : IQueryHandler<GetProductByIdQuery, Result<ProductDto>>
 {
     private readonly ILogger _logger = logger;
     private readonly IMapper _mapper = mapper;

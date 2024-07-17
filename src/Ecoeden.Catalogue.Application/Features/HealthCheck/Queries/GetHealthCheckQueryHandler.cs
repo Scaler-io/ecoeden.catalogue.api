@@ -1,13 +1,13 @@
 ﻿using App.Metrics.Health;
+using Ecoeden.Catalogue.Application.Contracts.CQRS;
 using Ecoeden.Catalogue.Application.Contracts.HealthStatus;
 using Ecoeden.Catalogue.Application.Extensions;
 using Ecoeden.Catalogue.Domain.Models.Core;
 using Ecoeden.Catalogue.Domain.Models.Dtos;
-using MediatR;
 
 namespace Ecoeden.Catalogue.Application.Features.HealthCheck.Queries;
 public sealed class GetHealthCheckQueryHandler(ILogger logger, IHealthCheckConfiguration healthCheck) 
-    : IRequestHandler<GetHealthCheckQuery, Result<HealthCheckDto>>
+    : IQueryHandler<GetHealthCheckQuery, Result<HealthCheckDto>>
 {
     private readonly ILogger _logger = logger;
     private readonly IHealthCheckConfiguration _healthCheck = healthCheck;

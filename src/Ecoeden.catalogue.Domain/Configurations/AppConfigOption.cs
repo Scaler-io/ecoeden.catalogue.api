@@ -7,4 +7,6 @@ public sealed class AppConfigOption
     public string ApplicationEnvironment { get; set; }
     public int HealthCheckTimeoutInSeconds {  get; set; }
     public int CacheExpiration { get; set; }
+    public string CategoryCacheKey {  get; set; }
+    public string ProductCacheKey { get; set; }
 }

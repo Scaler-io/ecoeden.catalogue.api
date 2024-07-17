@@ -1,10 +1,10 @@
-﻿using Ecoeden.Catalogue.Domain.Models.Core;
+﻿using Ecoeden.Catalogue.Application.Contracts.CQRS;
+using Ecoeden.Catalogue.Domain.Models.Core;
 using Ecoeden.Catalogue.Domain.Models.Dtos;
-using MediatR;
 
 namespace Ecoeden.Catalogue.Application.Features.Category.Query.GetCategory;
 public sealed class GetCategoryQuery(string categoryId) 
-    : IRequest<Result<CategoryDto>>
+    : IQuery<Result<CategoryDto>>
 {
     public string Id { get; private set; } = categoryId;
 }
