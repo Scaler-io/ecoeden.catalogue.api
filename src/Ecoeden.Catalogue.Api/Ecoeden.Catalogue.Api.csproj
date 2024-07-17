@@ -16,6 +16,20 @@
     <DebugType>portable</DebugType>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="AppData\categories.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="AppData\products.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="AppData\categories.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   
   <ItemGroup>
     <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
@@ -35,6 +49,12 @@
     <Using Include="Serilog.ILogger">
       <Alias>ILogger</Alias>
     </Using>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="AppData\products.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

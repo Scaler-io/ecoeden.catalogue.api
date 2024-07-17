@@ -1,6 +1,8 @@
 using Ecoeden.Catalogue.Api;
 using Ecoeden.Catalogue.Api.DI;
+using Ecoeden.Catalogue.Api.Extensions;
 using Ecoeden.Catalogue.Application.DI;
+using Ecoeden.Catalogue.Infrastructure.Data;
 using Ecoeden.Catalogue.Infrastructure.DI;
 using Ecoeden.Swagger;
 using Serilog;
@@ -24,6 +26,14 @@ builder.Host.UseSerilog(logger);
 var app = builder.Build();
 
 app.AddApplicationPipelines(app.Environment.IsDevelopment());
+
+if (app.Environment.IsDevelopment())
+{
+    app.SeedDatabase(async context =>
+    {
+        await CatalogueSeeder.SeedAsync(context);
+    });
+}
 
 try
 {

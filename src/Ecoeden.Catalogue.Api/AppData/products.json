@@ -1,0 +1,67 @@
+[
+  {
+    "Name": "Fiddle Leaf Fig",
+    "Description": "A popular indoor plant with large, leathery leaves.",
+    "Category": "Indoor Plants",
+    "Price": 45.99,
+    "ImageFile": "https://ecoeden.com/fiddle_leaf_fig.jpg",
+    "Slug": "fiddle-leaf-fig",
+    "SKU": "FLF123",
+    "CreatedAt": "2024-07-16T08:30:00Z",
+    "UpdatedAt": "2024-07-16T08:30:00Z",
+    "CreatedBy": "Default",
+    "UpdatedBy": "Default"
+  },
+  {
+    "Name": "Snake Plant",
+    "Description": "A hardy plant known for its upright, sword-like leaves.",
+    "Category": "Indoor Plants",
+    "Price": 29.99,
+    "ImageFile": "https://ecoeden.com/snake_plant.jpg",
+    "Slug": "snake-plant",
+    "SKU": "SP456",
+    "CreatedAt": "2024-07-16T08:30:00Z",
+    "UpdatedAt": "2024-07-16T08:30:00Z",
+    "CreatedBy": "Default",
+    "UpdatedBy": "Default"
+  },
+  {
+    "Name": "Monstera",
+    "Description": "A trendy plant with large, fenestrated leaves.",
+    "Category": "Indoor Plants",
+    "Price": 55.00,
+    "ImageFile": "https://ecoeden.com/monstera.jpg",
+    "Slug": "monstera",
+    "SKU": "MO789",
+    "CreatedAt": "2024-07-16T08:30:00Z",
+    "UpdatedAt": "2024-07-16T08:30:00Z",
+    "CreatedBy": "Default",
+    "UpdatedBy": "Default"
+  },
+  {
+    "Name": "Pothos",
+    "Description": "An easy-to-grow vine with heart-shaped leaves.",
+    "Category": "Indoor Plants",
+    "Price": 15.50,
+    "ImageFile": "https://ecoeden.com/pothos.jpg",
+    "Slug": "pothos",
+    "SKU": "PO101",
+    "CreatedAt": "2024-07-16T08:30:00Z",
+    "UpdatedAt": "2024-07-16T08:30:00Z",
+    "CreatedBy": "Default",
+    "UpdatedBy": "Default"
+  },
+  {
+    "Name": "Spider Plant",
+    "Description": "A resilient plant that produces spiderettes.",
+    "Category": "Indoor Plants",
+    "Price": 20.75,
+    "ImageFile": "https://ecoeden.com/spider_plant.jpg",
+    "Slug": "spider-plant",
+    "SKU": "SP112",
+    "CreatedAt": "2024-07-16T08:30:00Z",
+    "UpdatedAt": "2024-07-16T08:30:00Z",
+    "CreatedBy": "Default",
+    "UpdatedBy": "Default"
+  }
+]

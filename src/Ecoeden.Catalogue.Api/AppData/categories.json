@@ -1,0 +1,47 @@
+[
+  {
+    "Name": "Indoor Plants",
+    "ImageFile": "https://ecoeden.com/indoor_plants.jpg",
+    "Slug": "indoor-plants",
+    "CreatedAt": "2024-07-16T08:30:00Z",
+    "UpdatedAt": "2024-07-16T08:30:00Z",
+    "CreatedBy": "Default",
+    "UpdatedBy": "Default"
+  },
+  {
+    "Name": "Outdoor Plants",
+    "ImageFile": "https://ecoeden.com/outdoor_plants.jpg",
+    "Slug": "outdoor-plants",
+    "CreatedAt": "2024-07-16T08:30:00Z",
+    "UpdatedAt": "2024-07-16T08:30:00Z",
+    "CreatedBy": "Default",
+    "UpdatedBy": "Default"
+  },
+  {
+    "Name": "Succulents",
+    "ImageFile": "https://ecoeden.com/succulents.jpg",
+    "Slug": "succulents",
+    "CreatedAt": "2024-07-16T08:30:00Z",
+    "UpdatedAt": "2024-07-16T08:30:00Z",
+    "CreatedBy": "Default",
+    "UpdatedBy": "Default"
+  },
+  {
+    "Name": "Flowering Plants",
+    "ImageFile": "https://ecoeden.com/flowering_plants.jpg",
+    "Slug": "flowering-plants",
+    "CreatedAt": "2024-07-16T08:30:00Z",
+    "UpdatedAt": "2024-07-16T08:30:00Z",
+    "CreatedBy": "Default",
+    "UpdatedBy": "Default"
+  },
+  {
+    "Name": "Herbs",
+    "ImageFile": "https://ecoeden.com/herbs.jpg",
+    "Slug": "herbs",
+    "CreatedAt": "2024-07-16T08:30:00Z",
+    "UpdatedAt": "2024-07-16T08:30:00Z",
+    "CreatedBy": "Default",
+    "UpdatedBy": "Default"
+  }
+]
