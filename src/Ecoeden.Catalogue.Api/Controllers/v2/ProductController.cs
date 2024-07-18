@@ -18,6 +18,7 @@ using Ecoeden.Swagger.Examples.Product;
 using Microsoft.AspNetCore.Authorization;
 using Ecoeden.Catalogue.Application.Features.Product.Query.GetAllProducts;
 using Ecoeden.Catalogue.Application.Features.Product.Query.GetProductById;
+using Ecoeden.Catalogue.Application.Features.Product.Command.DeleteProduct;
 
 namespace Ecoeden.Catalogue.Api.Controllers.v2;
 
@@ -39,7 +40,7 @@ IMediator mediator)
     [ProducesResponseType(typeof(ProductDto), (int)HttpStatusCode.OK)]
     [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(ProductResponseExample))]
     // 400
-    [ProducesResponseType(typeof(ApiValidationResponse), (int)HttpStatusCode.InternalServerError)]
+    [ProducesResponseType(typeof(ApiValidationResponse), (int)HttpStatusCode.BadRequest)]
     [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(BadRequestResponseExample))]
     // 500
     [ProducesResponseType(typeof(ApiExceptionResponse), (int)HttpStatusCode.InternalServerError)]
@@ -68,8 +69,11 @@ IMediator mediator)
     // 200
     [ProducesResponseType(typeof(IReadOnlyList<ProductDto>), (int)HttpStatusCode.OK)]
     [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(ProductListResponseExample))]
+    // 404
+    [ProducesResponseType(typeof(ApiValidationResponse), (int)HttpStatusCode.NotFound)]
+    [SwaggerResponseExample((int)HttpStatusCode.BadRequest, typeof(NotFoundResponseExample))]
     // 400
-    [ProducesResponseType(typeof(ApiValidationResponse), (int)HttpStatusCode.InternalServerError)]
+    [ProducesResponseType(typeof(ApiValidationResponse), (int)HttpStatusCode.BadRequest)]
     [SwaggerResponseExample((int)HttpStatusCode.BadRequest, typeof(BadRequestResponseExample))]
     // 500
     [ProducesResponseType(typeof(ApiExceptionResponse), (int)HttpStatusCode.InternalServerError)]
@@ -90,6 +94,9 @@ IMediator mediator)
     // 200
     [ProducesResponseType(typeof(ProductDto), (int)HttpStatusCode.OK)]
     [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(ProductResponseExample))]
+    // 404
+    [ProducesResponseType(typeof(ApiValidationResponse), (int)HttpStatusCode.NotFound)]
+    [SwaggerResponseExample((int)HttpStatusCode.BadRequest, typeof(NotFoundResponseExample))]
     // 400
     [ProducesResponseType(typeof(ApiValidationResponse), (int)HttpStatusCode.InternalServerError)]
     [SwaggerResponseExample((int)HttpStatusCode.BadRequest, typeof(BadRequestResponseExample))]
@@ -102,6 +109,31 @@ IMediator mediator)
         Logger.Here().MethodEntered();
         var query = new GetProductByIdQuery(id);
         var result = await _mediator.Send(query);
+        Logger.Here().MethodExited();
+        return OkOrFailure(result);
+    }
+
+    [HttpDelete("products/{id}")]
+    [SwaggerHeader("CorrelationId", Description = "expects unique correlation id")]
+    [SwaggerOperation(OperationId = "GetProductById", Description = "Fetches products by its id")]
+    // 200
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+    [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(bool))]
+    // 404
+    [ProducesResponseType(typeof(ApiValidationResponse), (int)HttpStatusCode.NotFound)]
+    [SwaggerResponseExample((int)HttpStatusCode.BadRequest, typeof(NotFoundResponseExample))]
+    // 400
+    [ProducesResponseType(typeof(ApiValidationResponse), (int)HttpStatusCode.BadRequest)]
+    [SwaggerResponseExample((int)HttpStatusCode.BadRequest, typeof(BadRequestResponseExample))]
+    // 500
+    [ProducesResponseType(typeof(ApiExceptionResponse), (int)HttpStatusCode.InternalServerError)]
+    [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(InternalServerResponseExample))]
+    [RequirePermission(ApiAccess.InventoryWrite)]
+    public async Task<IActionResult> DeleteProduct([FromRoute] string id)
+    {
+        Logger.Here().MethodEntered();
+        var command = new DeleteProductCommand(id);
+        var result = await _mediator.Send(command);
         Logger.Here().MethodExited();
         return OkOrFailure(result);
     }
