@@ -27,13 +27,10 @@ var app = builder.Build();
 
 app.AddApplicationPipelines(app.Environment.IsDevelopment());
 
-if (app.Environment.IsDevelopment())
+app.SeedDatabase(async context =>
 {
-    app.SeedDatabase(async context =>
-    {
-        await CatalogueSeeder.SeedAsync(context);
-    });
-}
+    await CatalogueSeeder.SeedAsync(context);
+});
 
 try
 {

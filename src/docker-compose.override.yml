@@ -1,13 +1,13 @@
 version: '3.4'
 
 services:
-  mongodb:
+  catalogueDb:
     image: mongo
-    container_name: mongodb
+    container_name: catalogueDb
     ports:
      - 27017:27017
     volumes:
-     - mongo_data:/data/db
+     - catalogueDb_data:/data/db
     networks:
      - ecoeden_dev_net
 
@@ -17,15 +17,40 @@ services:
       - 8081:8081
     environment:
       - ME_CONFIG_OPTIONS_EDITORTHEME=yonce
-      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_SERVER=catalogueDb
     depends_on:
-      - mongodb
+      - catalogueDb
     networks:
      - ecoeden_dev_net
 
-  # ecoeden.catalogue.api:
-  #   environment:
-  #     - ASPNETCORE_ENVIRONMENT=Development
-  #     - ASPNETCORE_HTTP_PORTS=8080
-  #   ports:
-  #     - "5003:8080"
+  ecoeden.catalogue.api:
+    container_name: ecoeden.catalogue.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - Logging__IncludeScopes=false
+      - "Logging__LogOutputTemplate=[{Timestamp:dd-MM-yyyy HH:mm:ss, fff}] {Level} {Properties} [CorrelationId:{CorrelationId}] [Machine: {MachineName}] {CallerType}:{MemberName} {Message}{NewLine}{Exception}{NewLine}"
+      - Logging__Console__Enabled=true
+      - Logging__Console__LogLevel=Debug
+      - Logging__Elastic__Enabled=true
+      - Logging__Elastic__LogLevel=Debug
+      - AppConfigurations__ApplicationIdentifier=Ecoeden.User.Api
+      - AppConfigurations__ApplicationEnvironment=docker
+      - AppConfigurations__HealthCheckTimeOutInSeconds=2
+      - AppConfigurations__CacheExpiration=60
+      - AppConfigurations__CategoryCacheKey=category_cache
+      - AppConfigurations__ProductCacheKey=product_cache
+      - ApiDescription=Catalogue api description
+      - ApiOriginHost=localhost:5001
+      - IdentityGroupAccess__Authority=http://Ecoeden.IdentityServer 
+      - IdentityGroupAccess__Audience=ecoeden.user.api
+      - Elasticsearch__Uri=http://elasticsearch:9200
+      - ConnectionStrings__Redis=redis:6379
+      - Redis__InstanceName=Ecoeden.Catalogue.Cache
+      - MongoDb__ConnectionString=mongodb://catalogueDb:27017
+      - MongoDb__Database=CatalogueDb 
+    ports:
+      - "5002:8080"
+    depends_on:
+      - catalogueDb
+    networks:
+     - ecoeden_dev_net
