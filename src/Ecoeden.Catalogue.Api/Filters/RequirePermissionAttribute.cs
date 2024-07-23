@@ -1,7 +1,6 @@
 ﻿using Ecoeden.Catalogue.Api.Services;
 using Ecoeden.Catalogue.Application.Contracts.Security;
 using Ecoeden.Catalogue.Application.Extensions;
-using Ecoeden.Catalogue.Domain.Models.Constants;
 using Ecoeden.Catalogue.Domain.Models.Core;
 using Ecoeden.Catalogue.Domain.Models.Enums;
 using Microsoft.AspNetCore.Mvc;

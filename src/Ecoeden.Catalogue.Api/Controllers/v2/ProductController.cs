@@ -23,7 +23,7 @@ using Ecoeden.Catalogue.Application.Features.Product.Command.DeleteProduct;
 namespace Ecoeden.Catalogue.Api.Controllers.v2;
 
 [ApiVersion("2")]
-[Authorize]
+[Authorize(Policy = "RequiredScope")]
 public class ProductController(ILogger logger,
 IIdentityService identityService,
 IValidator<ProductDto> productValidator,
@@ -78,7 +78,6 @@ IMediator mediator)
     // 500
     [ProducesResponseType(typeof(ApiExceptionResponse), (int)HttpStatusCode.InternalServerError)]
     [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(InternalServerResponseExample))]
-    [RequirePermission(ApiAccess.InventoryRead)]
     public async Task<IActionResult> GetAllProducts()
     {
         Logger.Here().MethodEntered();

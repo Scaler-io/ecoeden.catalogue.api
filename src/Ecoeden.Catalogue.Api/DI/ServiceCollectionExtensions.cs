@@ -95,6 +95,15 @@ public static class ServiceCollectionExtensions
                 };
             });
 
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("RequiredScope", policy =>
+            {
+                policy.RequireClaim("scope", "catalogueapi:write");
+                policy.RequireClaim("scope", "catalogueapi:read");
+            });
+        });
+
         return services;
     }
 
