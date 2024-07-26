@@ -24,6 +24,7 @@ public static class InfrastructureServiceExtensions
         services.AddScoped<InMemoryCacheService>();
 
         services.AddScoped(typeof(IPublishService<,>), typeof(PublishService<,>));
+        services.AddScoped<IPublishServiceFactory, PublishServiceFactory>();
 
         services.AddScoped<IHealthCheck, DbHealthCheck>();
         services.AddScoped<IHealthCheckConfiguration, HealthCheckConfiguration>();

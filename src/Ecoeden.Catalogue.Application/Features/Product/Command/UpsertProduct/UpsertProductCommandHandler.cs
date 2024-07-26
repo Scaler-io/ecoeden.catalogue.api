@@ -19,7 +19,7 @@ public sealed class UpsertProductCommandHandler(IMapper mapper,
     ICacheFactory cacheFactory,
     IDocumentRepository<Domain.Entities.Product> productRepository,
     IOptions<AppConfigOption> appConfigOptions,
-    IPublishService<Domain.Entities.Product, ProductCreated> publishService)  
+    IPublishServiceFactory publishServiceFactory)  
     : ICommandHandler<UpsertProductCommand, Result<ProductDto>>
 {
     private readonly ILogger _logger = logger;
@@ -27,7 +27,7 @@ public sealed class UpsertProductCommandHandler(IMapper mapper,
     private readonly ICacheService _cacheService = cacheFactory.CreateService(CacheServiceTypes.Distributed);
     private readonly IDocumentRepository<Domain.Entities.Product> _productRepository = productRepository;
     private readonly AppConfigOption _appConfig = appConfigOptions.Value;
-    IPublishService<Domain.Entities.Product, ProductCreated> _publishService = publishService;
+    private readonly IPublishServiceFactory _publishServiceFactory = publishServiceFactory;
 
     public async Task<Result<ProductDto>> Handle(UpsertProductCommand request, CancellationToken cancellationToken)
     {
@@ -51,15 +51,18 @@ public sealed class UpsertProductCommandHandler(IMapper mapper,
 
         if (string.IsNullOrEmpty(request.Id))
         {
+            var service = _publishServiceFactory.CreatePublishService<Domain.Entities.Product, ProductCreated>();
             product.UpdateCreationData(request.RequestInformation.CurrentUser.Id);
             await _productRepository.UpsertAsync(product, MongoDbCollectionNames.Products);
-            await _publishService.PublishAsync(product, request.RequestInformation.CorrelationId);
+            await service.PublishAsync(product, request.RequestInformation.CorrelationId);
             dto = _mapper.Map<ProductDto>(product);
         }
         else
         {
+            var service = _publishServiceFactory.CreatePublishService<Domain.Entities.Product, ProductUpdated>();
             MapUpdateProductEntity(request, existingProduct);
             await _productRepository.UpsertAsync(existingProduct, MongoDbCollectionNames.Products);
+            await service.PublishAsync(existingProduct, request.RequestInformation.CorrelationId);
             dto = _mapper.Map<ProductDto>(existingProduct);
         }
 
