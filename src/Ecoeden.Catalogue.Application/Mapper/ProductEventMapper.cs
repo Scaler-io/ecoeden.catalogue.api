@@ -13,5 +13,7 @@ public class ProductEventMapper : Profile
         CreateMap<Domain.Entities.Product, ProductUpdated>()
             .ForMember(d => d.CreatedOn, o => o.MapFrom(s => s.CreatedAt))
             .ForMember(d => d.LastUpdatedOn, o => o.MapFrom(s => s.UpdatedAt));
+
+        CreateMap<Domain.Entities.Product, ProductDeleted>();
     }
 }

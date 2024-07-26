@@ -131,7 +131,7 @@ IMediator mediator)
     public async Task<IActionResult> DeleteProduct([FromRoute] string id)
     {
         Logger.Here().MethodEntered();
-        var command = new DeleteProductCommand(id);
+        var command = new DeleteProductCommand(id, RequestInformation.CorrelationId);
         var result = await _mediator.Send(command);
         Logger.Here().MethodExited();
         return OkOrFailure(result);

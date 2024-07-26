@@ -2,5 +2,6 @@
 public enum GenericEventType
 {
     ProductCreated,
-    ProductUpdated
+    ProductUpdated,
+    ProductDeleted
 }
