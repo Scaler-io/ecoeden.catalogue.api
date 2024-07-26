@@ -47,7 +47,10 @@ services:
       - ConnectionStrings__Redis=redis:6379
       - Redis__InstanceName=Ecoeden.Catalogue.Cache
       - MongoDb__ConnectionString=mongodb://catalogueDb:27017
-      - MongoDb__Database=CatalogueDb 
+      - MongoDb__Database=CatalogueDb
+      - EventBus__Host=rabbitmq
+      - EventBus__Username=guest
+      - EventBus__Password=guest 
     ports:
       - "5002:8080"
     depends_on:
