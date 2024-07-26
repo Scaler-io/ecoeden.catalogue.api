@@ -15,6 +15,7 @@ public class EntityBase
     public void UpdateCreationData(string userId)
     {
         CreatedAt = DateTime.UtcNow;
+        UpdatedAt = DateTime.UtcNow;
         CreatedBy = userId;
     }
 

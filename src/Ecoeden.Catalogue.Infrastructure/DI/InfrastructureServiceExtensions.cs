@@ -1,11 +1,14 @@
 ﻿using Ecoeden.Catalogue.Application.Contracts.Data;
+using Ecoeden.Catalogue.Application.Contracts.EventBus;
 using Ecoeden.Catalogue.Application.Contracts.HealthStatus;
 using Ecoeden.Catalogue.Application.Factories;
 using Ecoeden.Catalogue.Domain.Configurations;
 using Ecoeden.Catalogue.Infrastructure.Cache;
 using Ecoeden.Catalogue.Infrastructure.Data;
 using Ecoeden.Catalogue.Infrastructure.Data.Repositories;
+using Ecoeden.Catalogue.Infrastructure.EventBus;
 using Ecoeden.Catalogue.Infrastructure.HealthStatus;
+using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -19,6 +22,8 @@ public static class InfrastructureServiceExtensions
         services.AddScoped<ICacheFactory, CacheFactory>();
         services.AddScoped<DistributedCacheService>();
         services.AddScoped<InMemoryCacheService>();
+
+        services.AddScoped(typeof(IPublishService<,>), typeof(PublishService<,>));
 
         services.AddScoped<IHealthCheck, DbHealthCheck>();
         services.AddScoped<IHealthCheckConfiguration, HealthCheckConfiguration>();
@@ -37,6 +42,21 @@ public static class InfrastructureServiceExtensions
 
         services.AddScoped(typeof(IDocumentRepository<>), typeof(MongoDocumentRepository<>));
         services.AddScoped<ICatalogueContext, CatalogueContext>();
+
+        services.AddMassTransit(config =>
+        {
+            config.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("catalogues", false));
+            config.UsingRabbitMq((context, cfg) =>
+            {
+                var rabbitmq = configuration.GetSection(EventBusOptions.OptionName).Get<EventBusOptions>();
+                cfg.Host(rabbitmq.Host, "/", host =>
+                {
+                    host.Username(rabbitmq.Username);
+                    host.Password(rabbitmq.Password);
+                });
+            });
+        });
+        
 
         return services;
     }
