@@ -11,6 +11,15 @@
     <PackageReference Include="App.Metrics.Health" Version="3.2.0" />
     <PackageReference Include="App.Metrics.Health.Abstractions" Version="3.2.0" />
     <PackageReference Include="Destructurama.Attributed" Version="4.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Serilog" Version="3.1.1" />
@@ -30,6 +39,10 @@
     <Using Include="Serilog.ILogger">
       <Alias>ILogger</Alias>
     </Using>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Sql\Configurations\" />
   </ItemGroup>
 
 </Project>
