@@ -1,4 +1,5 @@
 ﻿using Ecoeden.Catalogue.Application.Contracts.Data;
+using Ecoeden.Catalogue.Application.Contracts.Data.Sql;
 using Ecoeden.Catalogue.Application.Contracts.EventBus;
 using Ecoeden.Catalogue.Application.Contracts.HealthStatus;
 using Ecoeden.Catalogue.Application.Factories;
@@ -6,9 +7,13 @@ using Ecoeden.Catalogue.Domain.Configurations;
 using Ecoeden.Catalogue.Infrastructure.Cache;
 using Ecoeden.Catalogue.Infrastructure.Data;
 using Ecoeden.Catalogue.Infrastructure.Data.Repositories;
+using Ecoeden.Catalogue.Infrastructure.Data.Sql;
+using Ecoeden.Catalogue.Infrastructure.Data.Sql.Repositories;
+using Ecoeden.Catalogue.Infrastructure.Data.Sql.Specifications;
 using Ecoeden.Catalogue.Infrastructure.EventBus;
 using Ecoeden.Catalogue.Infrastructure.HealthStatus;
 using MassTransit;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -44,6 +49,11 @@ public static class InfrastructureServiceExtensions
         services.AddScoped(typeof(IDocumentRepository<>), typeof(MongoDocumentRepository<>));
         services.AddScoped<ICatalogueContext, CatalogueContext>();
 
+        services.AddDbContext<EcoedenDbContext>(option =>
+        {
+            option.UseSqlServer(configuration.GetConnectionString("Sqlserver"));
+        });
+
         services.AddMassTransit(config =>
         {
             config.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("catalogues", false));
@@ -57,7 +67,8 @@ public static class InfrastructureServiceExtensions
                 });
             });
         });
-        
+
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
     }
