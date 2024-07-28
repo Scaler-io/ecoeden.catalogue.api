@@ -9,7 +9,6 @@ using Ecoeden.Catalogue.Infrastructure.Data;
 using Ecoeden.Catalogue.Infrastructure.Data.Repositories;
 using Ecoeden.Catalogue.Infrastructure.Data.Sql;
 using Ecoeden.Catalogue.Infrastructure.Data.Sql.Repositories;
-using Ecoeden.Catalogue.Infrastructure.Data.Sql.Specifications;
 using Ecoeden.Catalogue.Infrastructure.EventBus;
 using Ecoeden.Catalogue.Infrastructure.HealthStatus;
 using MassTransit;
@@ -49,10 +48,7 @@ public static class InfrastructureServiceExtensions
         services.AddScoped(typeof(IDocumentRepository<>), typeof(MongoDocumentRepository<>));
         services.AddScoped<ICatalogueContext, CatalogueContext>();
 
-        services.AddDbContext<EcoedenDbContext>(option =>
-        {
-            option.UseSqlServer(configuration.GetConnectionString("Sqlserver"));
-        });
+        
 
         services.AddMassTransit(config =>
         {
@@ -68,7 +64,13 @@ public static class InfrastructureServiceExtensions
             });
         });
 
+        services.AddDbContext<EcoedenDbContext>(option =>
+        {
+            option.UseSqlServer(configuration.GetConnectionString("Sqlserver"));
+        });
+
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
         return services;
     }

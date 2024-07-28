@@ -26,6 +26,4 @@ public class UnitOfWork(EcoedenDbContext context) : IUnitOfWork
 
     public async Task<int> Complete() => await _context.SaveChangesAsync();
 
-    public void Dispose() => _context.Dispose();
-
 }

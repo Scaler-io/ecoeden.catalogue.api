@@ -3,9 +3,17 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace Ecoeden.Catalogue.Infrastructure.Data.Sql;
-public class EcoedenDbContext(DbContextOptions<EcoedenDbContext> options)
-    : DbContext(options)
+public class EcoedenDbContext : DbContext
 {
+
+    public EcoedenDbContext(DbContextOptions<EcoedenDbContext> options)
+        : base(options)
+    {
+        
+    }
+
+    public DbSet<EventPublishHistory> EventPublishHistories { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

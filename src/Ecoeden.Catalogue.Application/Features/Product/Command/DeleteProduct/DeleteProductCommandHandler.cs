@@ -43,7 +43,10 @@ public sealed class DeleteProductCommandHandler(ILogger logger,
         await _productRepository.DeleteAsync(command.ProductId, MongoDbCollectionNames.Products);
         await _cacheService.RemoveAsync(_appConfig.ProductCacheKey, cancellationToken);
         var publishService = _publishServiceFactory.CreatePublishService<Domain.Entities.Product, ProductDeleted>();
-        await publishService.PublishAsync(existingProduct, command.CorrelationId);
+        await publishService.PublishAsync(existingProduct, command.CorrelationId, new Dictionary<string, string>
+        {
+            { "applicationName", _appConfig.ApplicationIdentifier }
+        });
 
         _logger.Here().Information("Product {id} has been deleted successfully", command.ProductId);
         _logger.Here().MethodExited();

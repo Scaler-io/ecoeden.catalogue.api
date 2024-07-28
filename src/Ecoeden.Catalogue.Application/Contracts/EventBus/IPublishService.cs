@@ -5,5 +5,5 @@ public interface IPublishService<T, TEvent>
     where T : class
     where TEvent : GenericEvent
 {
-    Task PublishAsync(T message, string correlationId, object additionalProperties = null);
+    Task PublishAsync(T message, string correlationId, Dictionary<string, string> additionalProperties = null);
 }

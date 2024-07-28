@@ -11,9 +11,6 @@ public class PublishServiceFactory(IServiceProvider serviceProvider) : IPublishS
         where T : class
         where TEvent : GenericEvent
     {
-        using var scope = _serviceProvider.CreateScope();
-        var service = scope.ServiceProvider;
-
-        return service.GetRequiredService<IPublishService<T, TEvent>>();
+        return _serviceProvider.GetRequiredService<IPublishService<T, TEvent>>();
     }
 }

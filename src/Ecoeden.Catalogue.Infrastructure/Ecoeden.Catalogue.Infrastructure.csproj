@@ -41,4 +41,8 @@
     </Using>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Sql\Migrations\" />
+  </ItemGroup>
+
 </Project>
