@@ -45,6 +45,7 @@ services:
       - IdentityGroupAccess__Audience=ecoeden.user.api
       - Elasticsearch__Uri=http://elasticsearch:9200
       - ConnectionStrings__Redis=redis:6379
+      - "ConnectionStrings__Sqlserver=Server=sqlserver;Database=EcoedenEvent;User Id=sa;Password=P@ssw0rd;Encrypt=True;TrustServerCertificate=True;"
       - Redis__InstanceName=Ecoeden.Catalogue.Cache
       - MongoDb__ConnectionString=mongodb://catalogueDb:27017
       - MongoDb__Database=CatalogueDb
