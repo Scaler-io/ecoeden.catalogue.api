@@ -24,7 +24,7 @@ services:
      - ecoeden_dev_net
 
   ecoeden.catalogue.api:
-    container_name: ecoeden.catalogue.api
+    container_name: Ecoeden.Catalogue.Api
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - Logging__IncludeScopes=false
