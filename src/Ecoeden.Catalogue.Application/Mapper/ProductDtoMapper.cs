@@ -1,6 +1,7 @@
 using AutoMapper;
 using Ecoeden.Catalogue.Application.Helpers;
 using Ecoeden.Catalogue.Domain.Models.Dtos;
+using System.Globalization;
 
 namespace Ecoeden.Catalogue.Application.Mapper;
 
@@ -11,8 +12,8 @@ public sealed class ProductDtoMapper : Profile
         CreateMap<Domain.Entities.Product, ProductDto>()
             .ForMember(d => d.MetaData, o => o.MapFrom(s => new MetaDataDto
             {
-                CreatedAt = DateTimeHelper.ConvertUtcToIst(s.CreatedAt).ToString("dd/MM/yyyy HH:mm:ss tt"),
-                UpdatedAt = DateTimeHelper.ConvertUtcToIst(s.UpdatedAt).ToString("dd/MM/yyyy HH:mm:ss tt"),
+                CreatedAt = new DateTimeOffset(DateTimeHelper.ConvertUtcToIst(s.CreatedAt), TimeSpan.Zero).ToString("dd/MM/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture),
+                UpdatedAt = new DateTimeOffset(DateTimeHelper.ConvertUtcToIst(s.UpdatedAt), TimeSpan.Zero).ToString("dd/MM/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture),
                 CreatedBy = s.CreatedBy,
                 UpdatedBy = s.UpdatedBy,
             }));
